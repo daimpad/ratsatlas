@@ -26,7 +26,10 @@ weiter() {  # Adresse, erwartetes Ziel
 }
 weiter "http://$HOST/" "https://$HOST/"
 weiter "https://www.$HOST/" "https://$HOST/"
-weiter "http://www.$HOST/" "https://$HOST/"
+# http://www zuerst auf https://www (gleicher Name, wie für HSTS empfohlen), dann auf die Hauptadresse
+weiter "http://www.$HOST/" "https://www.$HOST/"
+ende=$(curl -sS -L --max-time 20 -o /dev/null -w '%{url_effective} %{num_redirects}' "http://www.$HOST/")
+zeile "Ziel von http://www.$HOST/" "https://$HOST/ nach höchstens 2 Weiterleitungen" "$ende" "$( set -- $ende; [ "${1%/}" = "https://$HOST" ] && [ "$2" -le 2 ] && echo ok)"
 
 # 404-Seite
 code=$(curl -sS --max-time 20 -o /tmp/live404.html -w '%{http_code}' "$BASIS/gibt-es-nicht")
