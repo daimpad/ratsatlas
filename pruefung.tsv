@@ -38,3 +38,12 @@ Vor Umstellung: Weiterleitung https://www.ratsatlas.de/	curl (GET)	301 → https
 Vor Umstellung: Weiterleitung http://www.ratsatlas.de/	curl (GET)	301 → https://ratsatlas.de/	301 → https://www.ratsatlas.de/	2026-11-04
 Vor Umstellung: 404 unter https://ratsatlas.de/gibt-es-nicht	curl (GET)	404 mit eigener Seite	404, eigene Seite: nein	2026-11-04
 Vor Umstellung: https://ratsatlas.de/.htaccess nicht abrufbar	curl (GET)	403 oder 404	403	2026-11-04
+Ausweichadresse https://daimpad.github.io/ratsatlas/	curl, Playwright (Chromium)	200; alle Dateien unter /ratsatlas/ geladen; keine fremden Anfragen	200; keine fehlgeschlagenen Anfragen, keine Konsolenfehler, nur daimpad.github.io; Inter geladen; .htaccess 404 (nicht veröffentlicht)	2026-11-04
+Nach Umstellung: Status https://ratsatlas.de/	curl (GET), Workflow Live-Prüfung (GitHub-Rechner)	200, neue Startseite	200, Titel „Ratsatlas – Vorlagen aus kommunalen Ratsinformationssystemen“	2026-11-04
+Nach Umstellung: Sicherheitskopfzeilen (CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, HSTS) bei GET	curl (GET), Workflow Live-Prüfung	vorhanden	fehlen alle fünf; bei HEAD vorhanden (nginx liefert statische Dateien ohne .htaccess aus, wie in Bonn) – offen	2026-11-04
+Nach Umstellung: Weiterleitung http://ratsatlas.de/	curl, Workflow Live-Prüfung	301 → https://ratsatlas.de/	301 → https://ratsatlas.de/	2026-11-04
+Nach Umstellung: Weiterleitung https://www.ratsatlas.de/	curl, Workflow Live-Prüfung	301 → https://ratsatlas.de/	200, keine Weiterleitung – offen	2026-11-04
+Nach Umstellung: Weiterleitung http://www.ratsatlas.de/	curl, Workflow Live-Prüfung	301 → https://ratsatlas.de/	301 → https://www.ratsatlas.de/ – offen	2026-11-04
+Nach Umstellung: 404 unter https://ratsatlas.de/gibt-es-nicht	curl, Workflow Live-Prüfung	404 mit eigener Seite	404, eigene Seite	2026-11-04
+Nach Umstellung: https://ratsatlas.de/.htaccess	curl, Workflow Live-Prüfung	403 oder 404	403	2026-11-04
+Nach Umstellung: Zertifikat ratsatlas.de und www.ratsatlas.de	openssl s_client, Workflow Live-Prüfung (ohne Zwischenstelle)	gültig, beide Namen	gültig bis 02.02.2027, SAN ratsatlas.de und www.ratsatlas.de	2026-11-04

@@ -4,6 +4,7 @@ Stand 04.11.2026. Ausgangslage: `ratsatlas.de` liefert bereits über netcup (ngi
 
 ## GitHub
 
+- [ ] Nur der Workflow „Seite veröffentlichen“ liefert an GitHub Pages aus. Keine weitere Pages-Vorlage („Static HTML“, `static.yml`) anlegen: Sie veröffentlicht das ganze Repository und überschreibt je nach Laufreihenfolge die Seite.
 - [ ] Pull Request zusammenführen; der Workflow „Seite veröffentlichen“ schreibt danach den Branch `deploy`.
 - [ ] Settings → Pages → Source: **GitHub Actions** (Ausweichadresse `https://daimpad.github.io/ratsatlas/`). Läuft der Job `pages` vor dieser Einstellung, schlägt er fehl; danach Workflow unter Actions neu starten.
 
