@@ -1,6 +1,14 @@
 # Nur für das Webhosting (netcup, Plesk/Apache): Der Deploy-Workflow kopiert diese Datei als .htaccess
 # in den Branch deploy. GitHub Pages wertet sie nicht aus.
 AddDefaultCharset utf-8
+
+# www.ratsatlas.de → https://ratsatlas.de (301). Plesk bietet „Bevorzugte Domain“ hier nicht an (ausgegraut);
+# wirkt, weil Apache seit dem Abschalten der „Intelligenten Bearbeitung statischer Dateien“ alle Anfragen erhält.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.ratsatlas\.de$ [NC]
+  RewriteRule ^ https://ratsatlas.de%{REQUEST_URI} [R=301,L]
+</IfModule>
 AddType application/manifest+json .webmanifest
 AddType image/svg+xml .svg
 AddType font/woff2 .woff2
