@@ -1,0 +1,74 @@
+/* Ratsatlas – gemeinsame Gestaltungsgrößen des Kerns (Repository daimpad/ratsatlas).
+   Quelle: allris-test site/style.css (:root, .glass) und site/page.css, Stand 03.11.2026.
+   Die Stadtinstanzen übernehmen diese Datei; Änderungen hier zuerst.
+   Text und Primärschaltflächen nutzen --accent-ink bzw. --accent-fill statt --accent,
+   weil #8b5cf6 auf bzw. mit Weiß die WCAG-AA-Kontraste nicht erreicht. */
+
+/* Schrift Inter (SIL Open Font License, fonts/LICENSE-Inter.txt), lokal */
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("fonts/inter-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Hintergrund */
+  --bg: #fafaff;
+  --bg-gradient: radial-gradient(at 20% 0%, #ffe0f0 0%, transparent 50%),
+                 radial-gradient(at 80% 30%, #d4e4ff 0%, transparent 50%),
+                 radial-gradient(at 50% 100%, #e0d4ff 0%, transparent 50%);
+
+  /* Flächen */
+  --surface: rgba(255, 255, 255, 0.6);
+  --surface-strong: rgba(255, 255, 255, 0.85);
+  --surface-fallback: rgba(255, 255, 255, 0.96);  /* ohne backdrop-filter */
+  --border: rgba(255, 255, 255, 0.5);
+  --border-alt: rgba(15, 15, 20, 0.08);
+  --line: rgba(15, 15, 20, 0.1);
+
+  /* Text und Akzent */
+  --text: #0f0f14;
+  --text-muted: #5a5a68;
+  --accent: #8b5cf6;
+  --accent-soft: #c4b5fd;
+  --accent-ink: #6d28d9;
+  --accent-fill: #7c3aed;
+
+  /* Statusfarben (Bonn: --hoch, --mittel) */
+  --ok: #1f7a4d;
+  --warn: #9a5200;
+
+  /* Schatten, Unschärfe, Radien */
+  --shadow: 0 8px 32px rgba(15, 15, 20, 0.08);
+  --shadow-lift: 0 14px 40px rgba(15, 15, 20, 0.14), 0 2px 6px rgba(15, 15, 20, 0.06);
+  --highlight: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --blur: blur(20px) saturate(160%);
+  --blur-s: blur(8px) saturate(150%);  /* schmale Bildschirme */
+  --radius: 20px;
+  --radius-s: 12px;
+
+  /* Schaltflächen */
+  --cta: linear-gradient(135deg, #7c3aed 0%, #6d28d9 55%, #5b21b6 100%);
+  --cta-shadow: 0 6px 18px rgba(109, 40, 217, 0.32);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Schrift */
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  color-scheme: light;
+}
+
+/* Glasflächen */
+.glass {
+  background: var(--surface-strong); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow), var(--highlight);
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: var(--surface-fallback); }
+}
+@media (max-width: 600px) {
+  .glass { -webkit-backdrop-filter: var(--blur-s); backdrop-filter: var(--blur-s); }
+}
+
+:focus-visible { outline: 2px solid var(--accent-fill); outline-offset: 2px; }

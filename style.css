@@ -1,0 +1,104 @@
+/* Startseite ratsatlas.de und Textseiten; Gestaltungsgrößen in tokens.css.
+   Kacheln nach dem Muster .kachel aus allris-test site/page.css. */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  font: 400 16px/1.6 var(--font-body); color: var(--text);
+  background: var(--bg-gradient) fixed, var(--bg);
+}
+a { color: var(--accent-ink); }
+::selection { background: var(--accent-soft); }
+img { max-width: 100%; }
+
+.kopf, .inhalt, .fuss { width: min(1000px, calc(100% - 32px)); margin: 0 auto; }
+.inhalt { flex: 1; }
+
+/* Kopf mit Marke */
+.kopf { display: flex; align-items: center; gap: 16px; padding: 24px 0 8px; }
+.marke {
+  display: inline-flex; align-items: center; gap: 12px; margin: 0;
+  font-size: 24px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; color: var(--accent-fill); text-decoration: none;
+}
+.marke img { width: 40px; height: 40px; flex: none; }
+a.marke { font-size: 20px; }
+a.marke img { width: 32px; height: 32px; }
+
+/* Einleitung */
+.einleitung { margin: 16px 0 0; padding: 22px 28px; max-width: 760px; }
+.einleitung p { margin: 0; font-size: 18px; }
+.einleitung p + p { margin-top: 10px; font-size: 16px; color: var(--text-muted); }
+
+/* Kacheln */
+.abschnitt-titel {
+  margin: 36px 0 12px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted);
+}
+.kacheln { list-style: none; padding: 0; margin: 0 0 32px; display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .kacheln { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.kachel {
+  position: relative; display: flex; flex-direction: column; overflow: hidden; height: 100%;
+  border-radius: 22px;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.kachel-kopf {
+  position: relative; aspect-ratio: 1200 / 630; display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(255, 255, 255, 0.35) 0 22px, transparent 23px),
+    radial-gradient(circle at 76% 78%, rgba(255, 255, 255, 0.18) 0 38px, transparent 39px),
+    linear-gradient(135deg, #ede9fe, #ddd6fe);
+  border-bottom: 1px solid var(--border-alt);
+}
+.kachel-kopf img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.kachel-kopf .kachel-symbol { width: 72px; height: 72px; opacity: .55; }
+.kachel-inhalt { display: flex; flex-direction: column; gap: 10px; padding: 18px 22px 22px; flex: 1; }
+.kachel h3 { margin: 0; font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
+.kachel h3 a { color: var(--text); text-decoration: none; }
+.kachel h3 a::after { content: ""; position: absolute; inset: 0; border-radius: 22px; }  /* ganze Kachel klickbar */
+.kachel h3 a:focus-visible { outline: none; }
+.kachel-text { margin: 0; }
+.kachel-angaben { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 14px; }
+.kachel-angaben dt { color: var(--text-muted); }
+.kachel-angaben dd { margin: 0; overflow-wrap: anywhere; }
+
+/* Status als Text, die Farbe unterstützt nur */
+.status { display: inline-block; padding: 0 8px; border-radius: 999px; font-weight: 600; font-size: 13px; line-height: 1.6; border: 1px solid currentColor; }
+.status-online { color: var(--ok); background: #eaf6ef; }
+.status-vorbereitung { color: var(--warn); background: #fdf1e3; }
+
+/* Verlinkte Kachel: Anhebung bei Hover und Fokus */
+.kachel-link:hover, .kachel-link:focus-within { transform: translateY(-4px); box-shadow: var(--shadow-lift), var(--highlight); }
+.kachel-link:focus-within { outline: 2px solid var(--accent-fill); outline-offset: 3px; }
+.kachel-link:hover h3 a { color: var(--accent-ink); }
+/* Kachel ohne Link (in Vorbereitung) */
+.kachel-ohne-link h3 { color: var(--text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .kachel { transition: none; }
+  .kachel-link:hover, .kachel-link:focus-within { transform: none; }
+}
+
+/* Fuß */
+.fuss { padding: 20px 0 32px; color: var(--text-muted); font-size: 14px; }
+.fuss ul { display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; margin: 0; padding: 0; }
+.fuss a { display: inline-block; padding: 6px 0; }
+
+/* Textseiten (Datenschutz, 404), nach allris-test site/page.css */
+.page { width: 100%; max-width: 760px; margin: 12px 0 0; padding: 16px 28px 28px; }
+.page h1 { font-size: 32px; line-height: 1.2; letter-spacing: -0.02em; margin: 12px 0 6px; }
+.page h2 { font-size: 20px; letter-spacing: -0.01em; margin: 28px 0 6px; padding-top: 12px; border-top: 1px solid var(--line); }
+.page .lead { font-size: 18px; color: var(--text-muted); margin-top: 0; }
+.page .meta { color: var(--text-muted); font-size: 14px; }
+.entwurf { margin: 12px 0 16px; padding: 10px 14px; border: 1px solid var(--warn); border-left-width: 4px; border-radius: var(--radius-s); background: #fdf1e3; color: #5c3200; }
+.knopf { display: inline-block; margin: 8px 0 4px; padding: 10px 16px; border-radius: var(--radius-s); background: var(--cta); box-shadow: var(--cta-shadow); color: #fff; font-weight: 600; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .kopf { padding-top: 16px; }
+  .marke { font-size: 22px; }
+  .einleitung { padding: 18px 20px; }
+  .einleitung p { font-size: 17px; }
+  .page { padding: 8px 18px 20px; }
+  .page h1 { font-size: 26px; }
+  .kachel-angaben { grid-template-columns: 1fr; }
+  .kachel-angaben dd { margin-bottom: 4px; }
+}
