@@ -1,0 +1,40 @@
+Prüfschritt	Werkzeug	Erwartung	Ergebnis	Datum
+Barrierefreiheit index.html bei 360/768/1280 px	axe-core 4.10.3 (Playwright/Chromium; Regeln wcag2a, wcag2aa, wcag21a, wcag21aa, best-practice)	0 Verstöße	0 Verstöße; color-contrast „nicht entscheidbar“ wegen Verlauf/Glas, siehe Kontrastzeilen	2026-11-04
+Barrierefreiheit datenschutz.html bei 360/768/1280 px	axe-core 4.10.3	0 Verstöße	0 Verstöße; color-contrast „nicht entscheidbar“, siehe Kontrastzeilen	2026-11-04
+Barrierefreiheit 404.html bei 360/768/1280 px	axe-core 4.10.3	0 Verstöße	0 Verstöße; color-contrast „nicht entscheidbar“, siehe Kontrastzeilen	2026-11-04
+Kontrast Text #0f0f14 auf ungünstigstem Hintergrund (#e0d4ff)	Berechnung nach WCAG 2.1 (relative Leuchtdichte)	≥ 4,5:1	13,68:1	2026-11-04
+Kontrast gedämpfter Text #5a5a68 auf #e0d4ff	Berechnung nach WCAG 2.1	≥ 4,5:1	4,85:1 (auf Glas/Weiß 6,78:1)	2026-11-04
+Kontrast Links #6d28d9 auf #e0d4ff	Berechnung nach WCAG 2.1	≥ 4,5:1	5,09:1 (auf Weiß 7,10:1)	2026-11-04
+Kontrast Wortmarke #7c3aed (24 px bzw. 20 px, fett = großer Text) auf #e0d4ff	Berechnung nach WCAG 2.1	≥ 3:1	4,08:1	2026-11-04
+Kontrast Status „Online“ #1f7a4d auf #eaf6ef	Berechnung nach WCAG 2.1	≥ 4,5:1	4,79:1	2026-11-04
+Kontrast Status „In Vorbereitung“ #9a5200 auf #fdf1e3	Berechnung nach WCAG 2.1	≥ 4,5:1	5,27:1	2026-11-04
+Kontrast Entwurfshinweis #5c3200 auf #fdf1e3	Berechnung nach WCAG 2.1	≥ 4,5:1	9,87:1	2026-11-04
+Kontrast Knopf (404) weiß auf hellstem Verlaufston #7c3aed	Berechnung nach WCAG 2.1	≥ 4,5:1	5,70:1	2026-11-04
+Status nicht nur über Farbe	Sichtprüfung, HTML	Status als Text in jeder Kachel	„Online“ bzw. „In Vorbereitung“ als Text; Köln-Kachel ohne Link	2026-11-04
+Tastatur: Tab-Reihenfolge Startseite	Playwright (Tab, 1280 px)	Bonn-Kachel, Impressum, Datenschutz, Quellcode; Köln nicht fokussierbar	wie erwartet	2026-11-04
+Tastatur: Aktivierung Kachel mit Enter	Playwright	Navigation zu https://bonn.ratsatlas.de	Navigation ausgelöst	2026-11-04
+Sichtbarer Fokus	Playwright (computed style), Bildschirmfoto pruefung/fokus-bonn-1280.png	Rahmen 2 px var(--accent-fill)	Kachel 2px solid; Fußlinks 2px solid	2026-11-04
+prefers-reduced-motion	Playwright (reducedMotion: reduce, Hover auf Bonn-Kachel)	keine Anhebung	transform none (ohne Einstellung: translateY(-4px))	2026-11-04
+HTML-Validierung index.html, datenschutz.html, 404.html	Nu Html Checker (vnu-jar 24.10.17)	0 Fehler	0 Fehler, 0 Warnungen	2026-11-04
+CSS-Validierung tokens.css, style.css	Nu Html Checker --css (vnu-jar 24.10.17)	0 Fehler	0 Fehler, 0 Warnungen	2026-11-04
+Linkprüfung	lychee 0.18.1 (--root-dir site)	alle Links erreichbar; Köln ohne Link	31 OK, 1 ausgenommen (mailto); 2 Fehler: https://ratsatlas.de/datenschutz.html 404, erwartet vor der Umstellung (Phase E)	2026-11-04
+Erreichbarkeit Bonner Instanz	curl -L	Status 200	https://bonn.ratsatlas.de/ 200	2026-11-04
+Content-Security-Policy wirksam	Playwright (Einfügen eines Inline-Skripts)	Inline-Skript blockiert	blockiert (script-src 'self'); axe-Lauf daher mit bypassCSP	2026-11-04
+Konsole ohne Fehler (CSP, fehlende Dateien)	Playwright, 3 Seiten × 3 Breiten	keine Fehler	keine Fehler	2026-11-04
+Darstellung 360 px	Playwright, pruefung/startseite-360.png	eine Spalte, kein waagerechtes Scrollen	eine Spalte, kein waagerechtes Scrollen	2026-11-04
+Darstellung 768 px	Playwright, pruefung/startseite-768.png	zwei Spalten ab 720 px, kein waagerechtes Scrollen	zwei Spalten, kein waagerechtes Scrollen	2026-11-04
+Darstellung 1280 px	Playwright, pruefung/startseite-1280.png	zwei Spalten, kein waagerechtes Scrollen	zwei Spalten, kein waagerechtes Scrollen	2026-11-04
+Ladegewicht Startseite ohne Vorschaubild	du (index.html, tokens.css, style.css, favicon.svg, favicon.ico, Schrift)	< 150 KB	66 423 Byte (≈ 65 KB)	2026-11-04
+Kacheln entsprechen staedte.json	python3 scripts/kacheln.py --pruefen	ok	ok	2026-11-04
+Externe Ressourcen	Playwright (Netzwerkanfragen beim Laden), CSP default-src 'self'	keine Anfragen an fremde Server	keine; alle Anfragen an localhost	2026-11-04
+Vor Umstellung: Status https://ratsatlas.de/	curl (GET)	200	200	2026-11-04
+Vor Umstellung: Kopfzeile Content-Security-Policy	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile X-Content-Type-Options	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile Referrer-Policy	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile Permissions-Policy	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile Strict-Transport-Security	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Weiterleitung http://ratsatlas.de/	curl (GET)	301 → https://ratsatlas.de/	301 → https://ratsatlas.de/	2026-11-04
+Vor Umstellung: Weiterleitung https://www.ratsatlas.de/	curl (GET)	301 → https://ratsatlas.de/	200 → keine	2026-11-04
+Vor Umstellung: Weiterleitung http://www.ratsatlas.de/	curl (GET)	301 → https://ratsatlas.de/	301 → https://www.ratsatlas.de/	2026-11-04
+Vor Umstellung: 404 unter https://ratsatlas.de/gibt-es-nicht	curl (GET)	404 mit eigener Seite	404, eigene Seite: nein	2026-11-04
+Vor Umstellung: https://ratsatlas.de/.htaccess nicht abrufbar	curl (GET)	403 oder 404	403	2026-11-04

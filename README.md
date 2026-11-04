@@ -14,7 +14,13 @@ Die Stadtinstanzen liegen in eigenen Repositorys und unter eigenen Subdomains:
 | Bonn | <https://bonn.ratsatlas.de> | [daimpad/allris-test](https://github.com/daimpad/allris-test) | online |
 | Köln | <https://koeln.ratsatlas.de> | offen | in Vorbereitung |
 
-Die Liste wird in `staedte.json` gepflegt; eine neue Stadt ist ein neuer Eintrag.
+Die Liste wird in `staedte.json` gepflegt; eine neue Stadt ist ein neuer Eintrag. Danach schreibt
+
+```
+python3 scripts/kacheln.py
+```
+
+die Kacheln und das JSON-LD in `site/index.html`; `python3 scripts/kacheln.py --pruefen` meldet einen Fehler, wenn beides nicht übereinstimmt. Status `online` ergibt eine verlinkte Kachel, `in Vorbereitung` eine Kachel ohne Link.
 
 ## Lizenzen
 
@@ -23,4 +29,8 @@ Die Liste wird in `staedte.json` gepflegt; eine neue Stadt ist ein neuer Eintrag
 
 ## Deployment
 
-Bei jedem Push auf `main` wird der Inhalt von `site/` als Branch `deploy` geschrieben. Das Webhosting (Plesk) holt diesen Branch ab. GitHub Pages dient als Ausweichadresse.
+Bei jedem Push auf `main` prüft der Workflow „Seite veröffentlichen“ die Kacheln und schreibt den Inhalt von `site/` (mit `deploy/htaccess` als `.htaccess`) als Branch `deploy` ohne Historie. Das Webhosting (netcup, Plesk-Git) holt diesen Branch per Webhook ab. GitHub Pages (`https://daimpad.github.io/ratsatlas/`) dient als Ausweichadresse.
+
+- Einrichtung in Plesk, DNS und GitHub: `deploy/CHECKLISTE.md`
+- Prüfung der ausgelieferten Seite: Workflow „Live-Prüfung“ oder `scripts/live_pruefen.sh`
+- Prüfergebnisse: `pruefung.tsv`
