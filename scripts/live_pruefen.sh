@@ -31,6 +31,15 @@ weiter "http://www.$HOST/" "https://www.$HOST/"
 ende=$(curl -sS -L --max-time 20 -o /dev/null -w '%{url_effective} %{num_redirects}' "http://www.$HOST/")
 zeile "Ziel von http://www.$HOST/" "https://$HOST/ nach höchstens 2 Weiterleitungen" "$ende" "$( set -- $ende; [ "${1%/}" = "https://$HOST" ] && [ "$2" -le 2 ] && echo ok)"
 
+# Stand: Hat das Webhosting den letzten Commit des Branch deploy abgeholt? (version.txt, geschrieben vom Workflow)
+soll=""
+if git rev-parse --git-dir > /dev/null 2>&1 && git fetch -q --depth 1 origin deploy 2> /dev/null; then
+  soll=$(git show FETCH_HEAD:version.txt 2> /dev/null | tr -d '[:space:]')
+fi
+[ -n "$soll" ] || soll=$(curl -fsS --max-time 20 https://raw.githubusercontent.com/daimpad/ratsatlas/deploy/version.txt 2> /dev/null | tr -d '[:space:]')
+ist=$(curl -fsS --max-time 20 "$BASIS/version.txt" 2> /dev/null | tr -d '[:space:]')
+zeile "Stand $BASIS/version.txt = Branch deploy" "${soll:0:7}" "${ist:0:7}" "$([ -n "$soll" ] && [ "$ist" = "$soll" ] && echo ok)"
+
 # 404-Seite
 code=$(curl -sS --max-time 20 -o /tmp/live404.html -w '%{http_code}' "$BASIS/gibt-es-nicht")
 eigene=$(grep -c 'Diese Seite gibt es nicht' /tmp/live404.html 2>/dev/null || true)

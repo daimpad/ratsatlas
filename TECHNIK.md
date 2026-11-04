@@ -82,8 +82,8 @@ Keine Cookies, kein lokaler Speicher, keine Anfragen an fremde Server. Die Daten
 | Datei | Auslöser | Jobs |
 |---|---|---|
 | `pruefen.yml` | Pull Request | `kacheln`: `scripts/kacheln.py --pruefen` |
-| `veroeffentlichen.yml` | Push auf `main`, manuell | `pruefen` → `deploy` (Branch `deploy` ohne Historie, Force-Push, mit `.htaccess`) und `pages` (GitHub Pages aus `site/`, ohne `.htaccess`) |
-| `live.yml` | manuell | `scripts/live_pruefen.sh https://ratsatlas.de`, Ergebnis in der Zusammenfassung des Laufs |
+| `veroeffentlichen.yml` | Push auf `main`, manuell | `pruefen` → `deploy` (neuer Commit auf dem Branch `deploy`, mit `.htaccess` und `version.txt`) und `pages` (GitHub Pages aus `site/`, ohne `.htaccess`) |
+| `live.yml` | manuell | `scripts/live_pruefen.sh https://ratsatlas.de` (auch: Stand von `version.txt` = Branch `deploy`), Ergebnis in der Zusammenfassung des Laufs |
 
 Alle Actions sind auf Commit-Hashes festgelegt; Schreibrechte gelten nur in den Jobs, die sie brauchen.
 
@@ -98,7 +98,8 @@ Einrichtung Schritt für Schritt: [`deploy/CHECKLISTE.md`](deploy/CHECKLISTE.md)
 
 - In Plesk muss **„Intelligente Bearbeitung statischer Dateien“** aus sein (Proxymodus bleibt an). Sonst liefert nginx die Dateien selbst aus, und Kopfzeilen wie Weiterleitungen aus `.htaccess` fehlen bei GET – HEAD-Anfragen zeigen sie trotzdem. Daher prüft `live_pruefen.sh` mit GET.
 - „Bevorzugte Domain“ ist in Plesk nicht wählbar; die Weiterleitung von `www` steht deshalb in `.htaccess`.
-- Plesk übernimmt den ohne Historie neu geschriebenen Branch `deploy`.
+- Der Webhook-Abruf von Plesk übernimmt nur Stände, die an den vorhandenen anschließen: Bei einem ohne Historie neu geschriebenen Branch (Force-Push) antwortete Plesk mit 204, rief aber nicht ab. `deploy` wird deshalb fortlaufend geschrieben. Nur „Jetzt Pull ausführen“ von Hand übernimmt auch unverbundene Stände.
+- `version.txt` enthält den Commit von `main`; die Live-Prüfung vergleicht `https://ratsatlas.de/version.txt` mit dem Branch `deploy` und meldet einen nicht abgeholten Stand.
 - Nur ein Workflow darf an GitHub Pages ausliefern; die GitHub-Vorlage „Static HTML“ würde das ganze Repository veröffentlichen.
 
 ## Prüfung
