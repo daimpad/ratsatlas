@@ -52,14 +52,14 @@ flowchart LR
     V -->|site/| G["GitHub Pages<br>(Ausweichadresse)"]
     D --> R(["ratsatlas.de"])
     G --> A(["daimpad.github.io/ratsatlas"])
-    L["Live-Prüfung<br>(auf Knopfdruck)"] -.->|Status, Kopfzeilen,<br>Weiterleitungen, Zertifikat| R
+    L["Live-Prüfung<br>(auf Knopfdruck)"] -.->|Status, Kopfzeilen, Weiterleitungen,<br>Zertifikat, version.txt| R
 ```
 
 | Workflow | Wann | Was er prüft oder tut |
 |---|---|---|
 | **Prüfen** | jeder Pull Request | Kacheln und JSON-LD in `site/index.html` entsprechen `staedte.json` |
 | **Seite veröffentlichen** | jeder Push auf `main` | prüft erneut, schreibt `site/` als Branch `deploy` für das Webhosting und liefert an GitHub Pages aus |
-| **Live-Prüfung** | auf Knopfdruck | Status 200, fünf Sicherheitskopfzeilen, Weiterleitungen von `http` und `www`, eigene 404-Seite, Zertifikat |
+| **Live-Prüfung** | auf Knopfdruck | Status 200, fünf Sicherheitskopfzeilen, Weiterleitungen von `http` und `www`, eigene 404-Seite, Zertifikat und ob `ratsatlas.de/version.txt` dem Branch `deploy` entspricht |
 
 ## Eine Stadt hinzufügen
 
