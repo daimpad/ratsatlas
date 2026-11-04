@@ -47,3 +47,5 @@ Nach Umstellung: Weiterleitung http://www.ratsatlas.de/	curl, Workflow Live-Prü
 Nach Umstellung: 404 unter https://ratsatlas.de/gibt-es-nicht	curl, Workflow Live-Prüfung	404 mit eigener Seite	404, eigene Seite	2026-11-04
 Nach Umstellung: https://ratsatlas.de/.htaccess	curl, Workflow Live-Prüfung	403 oder 404	403	2026-11-04
 Nach Umstellung: Zertifikat ratsatlas.de und www.ratsatlas.de	openssl s_client, Workflow Live-Prüfung (ohne Zwischenstelle)	gültig, beide Namen	gültig bis 02.02.2027, SAN ratsatlas.de und www.ratsatlas.de	2026-11-04
+Nach Plesk-Änderung („Intelligente Bearbeitung statischer Dateien“ aus): Sicherheitskopfzeilen bei GET	curl (GET), scripts/live_pruefen.sh	CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, HSTS vorhanden	alle fünf vorhanden, Werte wie deploy/htaccess	2026-11-04
+Nach Plesk-Änderung: Weiterleitung https://www.ratsatlas.de/	curl, scripts/live_pruefen.sh	301 → https://ratsatlas.de/	200 – „Bevorzugte Domain“ in Plesk ausgegraut; Weiterleitung per deploy/htaccess (Pull Request) – offen	2026-11-04
