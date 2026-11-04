@@ -1,0 +1,38 @@
+# Nur für das Webhosting (netcup, Plesk/Apache): Der Deploy-Workflow kopiert diese Datei als .htaccess
+# in den Branch deploy. GitHub Pages wertet sie nicht aus.
+AddDefaultCharset utf-8
+AddType application/manifest+json .webmanifest
+AddType image/svg+xml .svg
+AddType font/woff2 .woff2
+AddType application/xml .xml
+AddCharset utf-8 .css .xml .webmanifest .txt
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/xml image/svg+xml application/manifest+json text/plain
+</IfModule>
+
+# Schrift und Bilder ändern sich selten; HTML und CSS ohne Versionsnummer im Namen: immer nachfragen (ETag, „304“)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType font/woff2 "access plus 1 month"
+  ExpiresByType image/png "access plus 1 week"
+  ExpiresByType image/jpeg "access plus 1 week"
+  ExpiresByType image/svg+xml "access plus 1 week"
+  ExpiresByType image/x-icon "access plus 1 week"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|css|webmanifest|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # Wie der meta-Eintrag in den HTML-Dateien, zusätzlich frame-ancestors (nur als Header wirksam)
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  # Nur HTTPS; ohne includeSubDomains, weil die Subdomains eigenständig betrieben werden
+  Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+RedirectMatch 404 /\.git
+ErrorDocument 404 /404.html

@@ -14,7 +14,13 @@ Die Stadtinstanzen liegen in eigenen Repositorys und unter eigenen Subdomains:
 | Bonn | <https://bonn.ratsatlas.de> | [daimpad/allris-test](https://github.com/daimpad/allris-test) | online |
 | Köln | <https://koeln.ratsatlas.de> | offen | in Vorbereitung |
 
-Die Liste wird in `staedte.json` gepflegt; eine neue Stadt ist ein neuer Eintrag.
+Die Liste wird in `staedte.json` gepflegt; eine neue Stadt ist ein neuer Eintrag. Danach schreibt
+
+```
+python3 scripts/kacheln.py
+```
+
+die Kacheln und das JSON-LD in `site/index.html`; `python3 scripts/kacheln.py --pruefen` meldet einen Fehler, wenn beides nicht übereinstimmt. Status `online` ergibt eine verlinkte Kachel, `in Vorbereitung` eine Kachel ohne Link.
 
 ## Lizenzen
 
