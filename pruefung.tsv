@@ -27,3 +27,14 @@ Darstellung 1280 px	Playwright, pruefung/startseite-1280.png	zwei Spalten, kein 
 Ladegewicht Startseite ohne Vorschaubild	du (index.html, tokens.css, style.css, favicon.svg, favicon.ico, Schrift)	< 150 KB	66 423 Byte (≈ 65 KB)	2026-11-04
 Kacheln entsprechen staedte.json	python3 scripts/kacheln.py --pruefen	ok	ok	2026-11-04
 Externe Ressourcen	Playwright (Netzwerkanfragen beim Laden), CSP default-src 'self'	keine Anfragen an fremde Server	keine; alle Anfragen an localhost	2026-11-04
+Vor Umstellung: Status https://ratsatlas.de/	curl (GET)	200	200	2026-11-04
+Vor Umstellung: Kopfzeile Content-Security-Policy	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile X-Content-Type-Options	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile Referrer-Policy	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile Permissions-Policy	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Kopfzeile Strict-Transport-Security	curl (GET)	vorhanden	fehlt	2026-11-04
+Vor Umstellung: Weiterleitung http://ratsatlas.de/	curl (GET)	301 → https://ratsatlas.de/	301 → https://ratsatlas.de/	2026-11-04
+Vor Umstellung: Weiterleitung https://www.ratsatlas.de/	curl (GET)	301 → https://ratsatlas.de/	200 → keine	2026-11-04
+Vor Umstellung: Weiterleitung http://www.ratsatlas.de/	curl (GET)	301 → https://ratsatlas.de/	301 → https://www.ratsatlas.de/	2026-11-04
+Vor Umstellung: 404 unter https://ratsatlas.de/gibt-es-nicht	curl (GET)	404 mit eigener Seite	404, eigene Seite: nein	2026-11-04
+Vor Umstellung: https://ratsatlas.de/.htaccess nicht abrufbar	curl (GET)	403 oder 404	403	2026-11-04

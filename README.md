@@ -29,4 +29,8 @@ die Kacheln und das JSON-LD in `site/index.html`; `python3 scripts/kacheln.py --
 
 ## Deployment
 
-Bei jedem Push auf `main` wird der Inhalt von `site/` als Branch `deploy` geschrieben. Das Webhosting (Plesk) holt diesen Branch ab. GitHub Pages dient als Ausweichadresse.
+Bei jedem Push auf `main` prüft der Workflow „Seite veröffentlichen“ die Kacheln und schreibt den Inhalt von `site/` (mit `deploy/htaccess` als `.htaccess`) als Branch `deploy` ohne Historie. Das Webhosting (netcup, Plesk-Git) holt diesen Branch per Webhook ab. GitHub Pages (`https://daimpad.github.io/ratsatlas/`) dient als Ausweichadresse.
+
+- Einrichtung in Plesk, DNS und GitHub: `deploy/CHECKLISTE.md`
+- Prüfung der ausgelieferten Seite: Workflow „Live-Prüfung“ oder `scripts/live_pruefen.sh`
+- Prüfergebnisse: `pruefung.tsv`

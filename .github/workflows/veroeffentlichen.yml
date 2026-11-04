@@ -1,0 +1,69 @@
+# Startseite ratsatlas.de veröffentlichen: bei jedem Push auf main und auf Knopfdruck.
+# 1. prüfen: Kacheln in site/index.html entsprechen staedte.json
+# 2. deploy: site/ plus deploy/htaccess (als .htaccess) als Branch deploy ohne Historie (Force-Push);
+#    das Webhosting (netcup, Plesk-Git) holt diesen Branch per Webhook ab
+# 3. pages: site/ (ohne .htaccess) als Ausweichadresse auf GitHub Pages
+name: Seite veröffentlichen
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Lesen als Vorgabe, Schreiben nur, wo ein Job es braucht
+permissions:
+  contents: read
+
+concurrency:
+  group: "veroeffentlichen"
+  cancel-in-progress: false
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+      - name: Kacheln entsprechen staedte.json
+        run: python3 scripts/kacheln.py --pruefen
+
+  deploy:
+    needs: pruefen
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # Branch deploy
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+      - name: Branch deploy ohne Historie schreiben
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf _deploy && mkdir _deploy
+          cp -r site/. _deploy/
+          cp deploy/htaccess _deploy/.htaccess
+          cd _deploy
+          git init -q -b deploy
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Seite aus ${GITHUB_SHA::7}, erzeugt $(date -u +%F)"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:deploy
+          echo "Branch deploy aus ${GITHUB_SHA::7} geschrieben"
+
+  pages:
+    needs: pruefen
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # Veröffentlichung auf GitHub Pages
+      id-token: write   # Nachweis gegenüber GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.veroeffentlichen.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b  # v5.0.0
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa  # v3.0.1
+        with:
+          path: site
+      - id: veroeffentlichen
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5.0.1
