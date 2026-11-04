@@ -30,4 +30,4 @@ Stand 04.11.2026. Ausgangslage: `ratsatlas.de` liefert bereits über netcup (ngi
 ## Danach
 
 - [ ] GitHub → Actions → „Live-Prüfung“ → Run workflow. Alle Zeilen müssen bestehen; das Ergebnis steht in der Zusammenfassung des Laufs und wird in `pruefung.tsv` übernommen.
-- [ ] Datenschutzseite prüfen und den Hinweis „Entwurf“ entfernen (`site/datenschutz.html`).
+- [x] Datenschutzseite geprüft und freigegeben (04.11.2026).
