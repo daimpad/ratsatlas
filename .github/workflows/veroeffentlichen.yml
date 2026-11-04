@@ -1,7 +1,8 @@
 # Startseite ratsatlas.de veröffentlichen: bei jedem Push auf main und auf Knopfdruck.
 # 1. prüfen: Kacheln in site/index.html entsprechen staedte.json
-# 2. deploy: site/ plus deploy/htaccess (als .htaccess) als Branch deploy ohne Historie (Force-Push);
-#    das Webhosting (netcup, Plesk-Git) holt diesen Branch per Webhook ab
+# 2. deploy: site/ plus deploy/htaccess (als .htaccess) und version.txt als neuer Commit auf dem Branch deploy
+#    (fortlaufende Historie, kein Force-Push: der Plesk-Webhook ruft nur ab, wenn der neue Stand an den
+#    vorhandenen anschließt; Befund 04.11.2026); das Webhosting (netcup, Plesk-Git) holt den Branch per Webhook ab
 # 3. pages: site/ (ohne .htaccess) als Ausweichadresse auf GitHub Pages
 name: Seite veröffentlichen
 
@@ -33,22 +34,32 @@ jobs:
       contents: write   # Branch deploy
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
-      - name: Branch deploy ohne Historie schreiben
+      - name: Branch deploy fortschreiben
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          rm -rf _deploy && mkdir _deploy
+          url="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          rm -rf _deploy
+          if git ls-remote --exit-code --heads "$url" deploy > /dev/null; then
+            git clone -q --depth 1 --branch deploy "$url" _deploy
+          else
+            git init -q -b deploy _deploy
+          fi
+          # Inhalt vollständig ersetzen (gelöschte Dateien verschwinden auch im Branch)
+          find _deploy -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -r site/. _deploy/
           cp deploy/htaccess _deploy/.htaccess
+          # Stand von main; die Live-Prüfung vergleicht ihn mit https://ratsatlas.de/version.txt
+          echo "${GITHUB_SHA}" > _deploy/version.txt
           cd _deploy
-          git init -q -b deploy
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
+          if git diff --cached --quiet; then echo "Seite unverändert, kein neuer Commit"; exit 0; fi
           git commit -q -m "Seite aus ${GITHUB_SHA::7}, erzeugt $(date -u +%F)"
-          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:deploy
-          echo "Branch deploy aus ${GITHUB_SHA::7} geschrieben"
+          git push -q "$url" HEAD:deploy
+          echo "Branch deploy aus ${GITHUB_SHA::7} fortgeschrieben"
 
   pages:
     needs: pruefen
