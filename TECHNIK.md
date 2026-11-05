@@ -28,6 +28,8 @@ ratsatlas/
 ├── staedte.json           Städteliste
 ├── scripts/
 │   ├── kacheln.py         schreibt Kacheln und JSON-LD; --pruefen für CI
+│   ├── sitemap.py         schreibt sitemap.xml mit lastmod aus der Git-Historie (im Workflow)
+│   ├── og_bild.py         erzeugt site/og-image.png aus og-bild.html (von Hand, Playwright)
 │   └── live_pruefen.sh    prüft die ausgelieferte Seite
 ├── deploy/
 │   ├── htaccess           wird im Branch deploy zu .htaccess
@@ -83,10 +85,19 @@ Keine Cookies, kein lokaler Speicher, keine Anfragen an fremde Server. Die Daten
 | Datei | Auslöser | Jobs |
 |---|---|---|
 | `pruefen.yml` | Pull Request | `kacheln`: `scripts/kacheln.py --pruefen` |
-| `veroeffentlichen.yml` | Push auf `main`, manuell | `pruefen` → `deploy` (neuer Commit auf dem Branch `deploy`, mit `.htaccess` und `version.txt`) und `pages` (GitHub Pages aus `site/`, ohne `.htaccess`) |
+| `veroeffentlichen.yml` | Push auf `main`, manuell | `pruefen` → `deploy` (Sitemap mit `lastmod`, neuer Commit auf dem Branch `deploy`, mit `.htaccess` und `version.txt`) und `pages` (GitHub Pages aus `site/`, ohne `.htaccess`, jede Seite mit `noindex`) |
 | `live.yml` | manuell | `scripts/live_pruefen.sh https://ratsatlas.de` (auch: Stand von `version.txt` = Branch `deploy`), Ergebnis in der Zusammenfassung des Laufs |
 
 Alle Actions sind auf Commit-Hashes festgelegt; Schreibrechte gelten nur in den Jobs, die sie brauchen.
+
+## Suchmaschinen
+
+- Eine Adresse je Seite: `/index.html` leitet mit 301 auf `/` (`.htaccess`), `www` auf `ratsatlas.de`; Canonical in jeder Seite.
+- Die Ausweichadresse auf GitHub Pages trägt `noindex` (gesetzt im Workflow), damit sie nicht mit ratsatlas.de konkurriert.
+- `sitemap.xml` mit `lastmod` je Seite, erzeugt von `scripts/sitemap.py` im Workflow; `robots.txt` verweist darauf.
+- Vorschau für geteilte Links: `og-image.png` (1200 × 630), Twitter-Karte `summary_large_image`.
+- JSON-LD `WebSite` mit `publisher` (Damian Paderta), `sponsor` (Offene Kommunen.NRW), `about` und `hasPart` (Städte mit Status `online`).
+- Keine Reichweitenmessung; Auswertung über Google Search Console (Domain-Eigenschaft) und Bing Webmaster Tools.
 
 ## Deployment
 

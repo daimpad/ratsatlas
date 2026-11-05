@@ -31,3 +31,12 @@ Stand 04.11.2026. Ausgangslage: `ratsatlas.de` liefert bereits über netcup (ngi
 
 - [ ] GitHub → Actions → „Live-Prüfung“ → Run workflow. Alle Zeilen müssen bestehen; das Ergebnis steht in der Zusammenfassung des Laufs und wird in `pruefung.tsv` übernommen.
 - [x] Datenschutzseite geprüft und freigegeben (04.11.2026).
+
+## Suchmaschinen
+
+- [ ] Google Search Console: Domain-Eigenschaft `ratsatlas.de` (erfasst auch `bonn.` und `koeln.`), Bestätigung über einen **neuen** DNS-TXT-Eintrag `google-site-verification=…` (bestehende MX- und TXT-Einträge bleiben unverändert).
+- [ ] Search Console → Sitemaps: `https://ratsatlas.de/sitemap.xml` einreichen.
+- [ ] Search Console → URL-Prüfung: `https://ratsatlas.de/` prüfen, „Indexierung beantragen“.
+- [ ] Bing Webmaster Tools: „Aus Google Search Console importieren“ (deckt auch DuckDuckGo und Ecosia ab).
+- [ ] GitHub → Repository → „About“ (Zahnrad): Website `https://ratsatlas.de` eintragen.
+- [ ] Nach vier bis sechs Wochen: Bericht „Leistung“ (Suchanfragen, Seiten) auswerten.

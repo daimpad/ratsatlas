@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
   <title>Ratsatlas – Ratsentscheidungen vor der eigenen Haustür</title>
-  <meta name="description" content="Der Ratsatlas zeigt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste: den Ort einer Planung, die beratenden Gremien und den weiteren Verlauf. Jede Angabe führt zurück zur Quelle.">
+  <meta name="description" content="Öffentliche Vorlagen aus Ratsinformationssystemen auf Karte und Zeitleiste – mit Gremien, Ämtern und Quellenangabe. Zuerst für Bonn.">
   <link rel="canonical" href="https://ratsatlas.de/">
   <meta name="theme-color" content="#7c3aed">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -21,9 +21,16 @@
   <meta property="og:title" content="Ratsatlas – Ratsentscheidungen vor der eigenen Haustür">
   <meta property="og:description" content="Öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste – mit Gremien, Ämtern und Quellen.">
   <meta property="og:url" content="https://ratsatlas.de/">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://ratsatlas.de/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Ratsatlas: Ratsentscheidungen vor der eigenen Haustür – stilisierte Stadtkarte mit Ortsmarken über einer Zeitleiste">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ratsatlas – Ratsentscheidungen vor der eigenen Haustür">
   <meta name="twitter:description" content="Öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste – mit Gremien, Ämtern und Quellen.">
+  <meta name="twitter:image" content="https://ratsatlas.de/og-image.png">
+  <meta name="twitter:image:alt" content="Ratsatlas: Ratsentscheidungen vor der eigenen Haustür – stilisierte Stadtkarte mit Ortsmarken über einer Zeitleiste">
   <!-- jsonld:anfang (erzeugt von scripts/kacheln.py aus staedte.json – nicht von Hand ändern) -->
   <script type="application/ld+json">
   {
@@ -33,6 +40,23 @@
     "url": "https://ratsatlas.de/",
     "inLanguage": "de",
     "description": "Der Ratsatlas erschließt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen räumlich, zeitlich und nach beteiligten Gremien und Ämtern.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Damian Paderta"
+    },
+    "sponsor": {
+      "@type": "Organization",
+      "name": "Offene Kommunen.NRW",
+      "url": "https://oknrw.de/"
+    },
+    "about": [
+      "Kommunalpolitik",
+      "Ratsinformationssystem",
+      "Transparenz",
+      "Bürgerbeteiligung"
+    ],
+    "isAccessibleForFree": true,
+    "license": "https://opensource.org/licenses/MIT",
     "hasPart": [
       {
         "@type": "WebSite",

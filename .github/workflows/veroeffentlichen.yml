@@ -3,7 +3,7 @@
 # 2. deploy: site/ plus deploy/htaccess (als .htaccess) und version.txt als neuer Commit auf dem Branch deploy
 #    (fortlaufende Historie, kein Force-Push: der Plesk-Webhook ruft nur ab, wenn der neue Stand an den
 #    vorhandenen anschließt; Befund 04.11.2026); das Webhosting (netcup, Plesk-Git) holt den Branch per Webhook ab
-# 3. pages: site/ (ohne .htaccess) als Ausweichadresse auf GitHub Pages
+# 3. pages: site/ (ohne .htaccess, mit noindex) als Ausweichadresse auf GitHub Pages
 name: Seite veröffentlichen
 
 on:
@@ -34,6 +34,10 @@ jobs:
       contents: write   # Branch deploy
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          fetch-depth: 0   # volle Historie für lastmod in der Sitemap
+      - name: Sitemap mit Änderungsdatum
+        run: python3 scripts/sitemap.py
       - name: Branch deploy fortschreiben
         env:
           GH_TOKEN: ${{ github.token }}
@@ -72,9 +76,22 @@ jobs:
       url: ${{ steps.veroeffentlichen.outputs.page_url }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+        with:
+          fetch-depth: 0
+      - name: Sitemap mit Änderungsdatum
+        run: python3 scripts/sitemap.py
+      # Ausweichadresse nicht indexieren: Kopie von site/ mit noindex in jeder HTML-Seite
+      - name: Kopie für GitHub Pages (noindex)
+        run: |
+          set -euo pipefail
+          rm -rf _pages && cp -r site _pages
+          for f in _pages/*.html; do
+            grep -q 'name="robots"' "$f" || sed -i '0,/<meta name="viewport"[^>]*>/s//&\n  <meta name="robots" content="noindex">/' "$f"
+            grep -q 'name="robots"' "$f" || { echo "::error::noindex fehlt in $f"; exit 1; }
+          done
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b  # v5.0.0
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa  # v3.0.1
         with:
-          path: site
+          path: _pages
       - id: veroeffentlichen
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346  # v5.0.1
