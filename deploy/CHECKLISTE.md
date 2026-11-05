@@ -39,4 +39,5 @@ Stand 04.11.2026. Ausgangslage: `ratsatlas.de` liefert bereits über netcup (ngi
 - [ ] Search Console → URL-Prüfung: `https://ratsatlas.de/` prüfen, „Indexierung beantragen“.
 - [ ] Bing Webmaster Tools: „Aus Google Search Console importieren“ (deckt auch DuckDuckGo und Ecosia ab).
 - [ ] GitHub → Repository → „About“ (Zahnrad): Website `https://ratsatlas.de` eintragen.
+- [ ] PageSpeed Insights: https://pagespeed.web.dev/ mit `https://ratsatlas.de/` (maßgebliche Messung von Google; Lighthouse lokal: SEO, Barrierefreiheit, Best Practices je 100).
 - [ ] Nach vier bis sechs Wochen: Bericht „Leistung“ (Suchanfragen, Seiten) auswerten.
