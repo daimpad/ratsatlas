@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
-  <title>Ratsatlas – Vorlagen aus kommunalen Ratsinformationssystemen</title>
-  <meta name="description" content="Der Ratsatlas erschließt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen räumlich, zeitlich und nach beteiligten Gremien und Ämtern.">
+  <title>Ratsatlas – Ratsentscheidungen vor der eigenen Haustür</title>
+  <meta name="description" content="Der Ratsatlas zeigt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste: den Ort einer Planung, die beratenden Gremien und den weiteren Verlauf. Jede Angabe führt zurück zur Quelle.">
   <link rel="canonical" href="https://ratsatlas.de/">
   <meta name="theme-color" content="#7c3aed">
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -18,12 +18,12 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="Ratsatlas">
-  <meta property="og:title" content="Ratsatlas">
-  <meta property="og:description" content="Öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste, mit Gremien, Ämtern und Quellen.">
+  <meta property="og:title" content="Ratsatlas – Ratsentscheidungen vor der eigenen Haustür">
+  <meta property="og:description" content="Öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste – mit Gremien, Ämtern und Quellen.">
   <meta property="og:url" content="https://ratsatlas.de/">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Ratsatlas">
-  <meta name="twitter:description" content="Öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste, mit Gremien, Ämtern und Quellen.">
+  <meta name="twitter:title" content="Ratsatlas – Ratsentscheidungen vor der eigenen Haustür">
+  <meta name="twitter:description" content="Öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste – mit Gremien, Ämtern und Quellen.">
   <!-- jsonld:anfang (erzeugt von scripts/kacheln.py aus staedte.json – nicht von Hand ändern) -->
   <script type="application/ld+json">
   {
@@ -46,18 +46,142 @@
   <!-- jsonld:ende -->
 </head>
 <body>
+  <a class="sprung" href="#inhalt">Zum Inhalt</a>
+
   <header class="kopf">
-    <h1 class="marke"><img src="favicon.svg" width="40" height="40" alt="">Ratsatlas</h1>
+    <a class="marke" href="./"><img src="favicon.svg" width="36" height="36" alt="">Ratsatlas</a>
+    <nav class="leiste" aria-label="Abschnitte">
+      <ul>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#vorgehen">Vorgehen</a></li>
+        <li><a href="#staedte">Städte</a></li>
+        <li><a href="#mitwirkung">Mitwirkung</a></li>
+        <li><a href="#projekt">Projekt</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main class="inhalt" id="inhalt">
-    <section class="einleitung glass" aria-label="Einleitung">
-      <p>Der Ratsatlas erschließt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen räumlich, zeitlich und nach beteiligten Gremien und Ämtern.</p>
-      <p>Jede Angabe ist auf ihre Quelle im Ratsinformationssystem rückführbar; abgeleitete Informationen sind gekennzeichnet.</p>
+
+    <!-- 2 · Einstieg -->
+    <section class="einstieg" aria-labelledby="titel">
+      <div class="einstieg-text">
+        <h1 id="titel">Ratsentscheidungen vor der eigenen Haustür</h1>
+        <p class="einstieg-lead">Der Ratsatlas zeigt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste: den Ort einer Planung, die beratenden Gremien und den weiteren Verlauf. Jede Angabe führt zurück zur Quelle.</p>
+        <p class="knoepfe">
+          <a class="knopf" href="https://bonn.ratsatlas.de">Ratsatlas Bonn öffnen</a>
+          <a class="knopf knopf-leise" href="#mitwirkung">Mitwirken</a>
+        </p>
+      </div>
+      <div class="einstieg-bild glass" aria-hidden="true">
+        <!-- Stilisierte Stadt: Fluss, Straßen, Ortsmarken und Zeitleiste; keine echten Kartendaten -->
+        <svg viewBox="0 0 480 400" focusable="false">
+          <defs>
+            <linearGradient id="pin" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#5b21b6"/>
+            </linearGradient>
+          </defs>
+          <path d="M-10 70 C 90 90, 140 170, 210 210 S 360 250, 490 330" fill="none" stroke="#d4e4ff" stroke-width="34" stroke-linecap="round"/>
+          <g fill="none" stroke="#ddd6fe" stroke-width="5" stroke-linecap="round">
+            <path d="M40 20 L120 300"/>
+            <path d="M20 250 L460 120"/>
+            <path d="M300 20 L340 300"/>
+            <path d="M180 40 C 220 120, 260 140, 400 60"/>
+            <path d="M60 330 L420 300"/>
+          </g>
+          <g fill="none" stroke="#ede9fe" stroke-width="3">
+            <path d="M90 120 L250 80"/>
+            <path d="M150 260 L240 330"/>
+            <path d="M380 180 L430 280"/>
+          </g>
+          <g fill="#f5f3ff" stroke="#ddd6fe" stroke-width="2">
+            <rect x="200" y="110" width="46" height="34" rx="6"/>
+            <rect x="350" y="200" width="54" height="40" rx="6"/>
+            <rect x="70" y="170" width="40" height="44" rx="6"/>
+          </g>
+          <g stroke="#a78bfa" stroke-width="2" stroke-dasharray="4 5" fill="none">
+            <path d="M118 150 L118 352"/>
+            <path d="M262 182 L262 352"/>
+            <path d="M372 132 L372 352"/>
+          </g>
+          <g>
+            <path d="M118 104c-12 0-22 9.6-22 21.6C96 141.8 118 162 118 162s22-20.2 22-36.4c0-12-10-21.6-22-21.6z" fill="url(#pin)"/>
+            <circle cx="118" cy="125" r="7.5" fill="#fff"/>
+            <path d="M262 136c-12 0-22 9.6-22 21.6C240 173.8 262 194 262 194s22-20.2 22-36.4c0-12-10-21.6-22-21.6z" fill="url(#pin)"/>
+            <circle cx="262" cy="157" r="7.5" fill="#fff"/>
+            <path d="M372 86c-12 0-22 9.6-22 21.6C350 123.8 372 144 372 144s22-20.2 22-36.4c0-12-10-21.6-22-21.6z" fill="url(#pin)"/>
+            <circle cx="372" cy="107" r="7.5" fill="#fff"/>
+          </g>
+          <rect x="40" y="340" width="400" height="24" rx="12" fill="#fff" stroke="#ede9fe" stroke-width="2"/>
+          <path d="M58 352 H422" stroke="#c4b5fd" stroke-width="3" stroke-linecap="round"/>
+          <g fill="#7c3aed">
+            <circle cx="118" cy="352" r="6"/>
+            <circle cx="262" cy="352" r="6"/>
+            <circle cx="372" cy="352" r="6"/>
+          </g>
+          <g fill="#c4b5fd">
+            <circle cx="186" cy="352" r="4"/>
+            <circle cx="318" cy="352" r="4"/>
+          </g>
+        </svg>
+      </div>
     </section>
 
-    <section aria-labelledby="staedte-titel">
-      <h2 class="abschnitt-titel" id="staedte-titel">Städte</h2>
+    <!-- 3 · Motivation -->
+    <section class="abschnitt" id="motivation" aria-labelledby="motivation-titel">
+      <p class="abschnitt-marke">Motivation</p>
+      <h2 id="motivation-titel">Öffentlichkeit braucht Übersicht</h2>
+      <p class="abschnitt-lead">Kommunale Entscheidungen prägen den Alltag: Schulwege, Plätze, Radwege, Bebauung, Grünflächen. Die Unterlagen dazu sind öffentlich. Ihr Verständnis erfordert dennoch viel Zeit und Vorwissen.</p>
+      <ul class="karten karten-3">
+        <li class="karte glass">
+          <svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M4 7v14h11"/></svg>
+          <h3>Öffentlich heißt noch nicht zugänglich</h3>
+          <p>Vorlagen verteilen sich auf viele Sitzungen, Gremien und PDF-Dokumente. Die Suche nach Planungen in der eigenen Straße kostet oft Stunden.</p>
+        </li>
+        <li class="karte glass">
+          <svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5c-4 0-7 3-7 6.8C5 14.6 12 21 12 21s7-6.4 7-11.7c0-3.8-3-6.8-7-6.8z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <h3>Entscheidungen haben einen Ort</h3>
+          <p>Fast jede Vorlage betrifft einen konkreten Ort. Die Karte macht Beratungen in der Nachbarschaft sichtbar, ebenso in anderen Stadtteilen.</p>
+        </li>
+        <li class="karte glass">
+          <svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h11v8H9l-4 3.5V13H4z"/><path d="M15 9h5v8h-1v3l-3.5-3H11v-2"/></svg>
+          <h3>Nachvollziehbarkeit als Grundlage der Teilhabe</h3>
+          <p>Kenntnis der Beratungen ermöglicht Information, Nachfrage und Mitsprache: in Bürgersprechstunden, Bezirksvertretungen, Initiativen oder im Gespräch mit Ratsmitgliedern. Der Ratsatlas bietet dafür eine verlässliche Grundlage.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 4 · Vorgehen -->
+    <section class="abschnitt" id="vorgehen" aria-labelledby="vorgehen-titel">
+      <p class="abschnitt-marke">Vorgehen</p>
+      <h2 id="vorgehen-titel">Von der Vorlage zur Karte</h2>
+      <p class="abschnitt-lead">Der Ratsatlas erzeugt keine eigenen Inhalte. Er ordnet die Veröffentlichungen der Städte.</p>
+      <ol class="schritte">
+        <li>
+          <h3>Vorlagen aus dem Ratsinformationssystem</h3>
+          <p>Grundlage bilden die öffentlichen Vorlagen der Stadt, abgerufen über ihre offene Schnittstelle (OParl).</p>
+        </li>
+        <li>
+          <h3>Verortung</h3>
+          <p>Nennt eine Vorlage eine Straße, einen Platz oder einen Stadtteil, erscheint sie auf der Karte. Wohnadressen von Privatpersonen bleiben unverortet.</p>
+        </li>
+        <li>
+          <h3>Beratungsverlauf</h3>
+          <p>Die Zeitleiste zeigt die Beratungen in Ausschüssen, Bezirksvertretungen und Rat sowie die beteiligten Ämter.</p>
+        </li>
+        <li>
+          <h3>Quellenbezug</h3>
+          <p>Jede Angabe verweist auf das Originaldokument im Ratsinformationssystem. Abgeleitete Angaben, etwa ein Ort oder ein Thema, tragen eine Kennzeichnung.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 5 · Städte -->
+    <section class="abschnitt" id="staedte" aria-labelledby="staedte-titel">
+      <p class="abschnitt-marke">Städte</p>
+      <h2 id="staedte-titel">Städte im Ratsatlas</h2>
+      <p class="abschnitt-lead">Jede Stadt hat eine eigene Instanz unter eigener Adresse. Weitere Städte folgen schrittweise.</p>
       <!-- kacheln:anfang (erzeugt von scripts/kacheln.py aus staedte.json – nicht von Hand ändern) -->
       <ul class="kacheln">
         <li class="kachel glass kachel-link">
@@ -87,6 +211,69 @@
       </ul>
       <!-- kacheln:ende -->
     </section>
+
+    <!-- 6 · Mitwirkung -->
+    <section class="abschnitt" id="mitwirkung" aria-labelledby="mitwirkung-titel">
+      <p class="abschnitt-marke">Mitwirkung</p>
+      <h2 id="mitwirkung-titel">Mitwirkung</h2>
+      <p class="abschnitt-lead">Der Ratsatlas lebt von Aufmerksamkeit, Hinweisen und Beiträgen aus der Stadtgesellschaft. Vier Wege stehen offen.</p>
+      <ul class="karten karten-4">
+        <li class="karte glass">
+          <svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          <h3>Beratungen verfolgen</h3>
+          <p>Der Ratsatlas Ihrer Stadt zeigt die Vorlagen für den eigenen Stadtteil, für ein Thema oder für ein Gremium und ihren aktuellen Beratungsstand.</p>
+          <p class="karte-links"><a href="https://bonn.ratsatlas.de">Ratsatlas Bonn öffnen</a></p>
+        </li>
+        <li class="karte glass">
+          <svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></svg>
+          <h3>Hinweise geben</h3>
+          <p>Eine falsche Verortung, ein fehlender Ort, ein Fehler in der Darstellung: Jeder Hinweis verbessert die Grundlage für alle.</p>
+          <p class="karte-links"><span class="offen">Hinweis per E-Mail (Adresse offen)</span> <a href="https://github.com/daimpad/ratsatlas/issues/new">Hinweis auf GitHub</a></p>
+        </li>
+        <li class="karte glass">
+          <svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 21h18"/><path d="M5 21V10l4-3 4 3v11"/><path d="M13 21V6l4-3 4 3v15"/><path d="M8 13h2M8 16h2M16 9h2M16 12h2M16 15h2"/></svg>
+          <h3>Eine Stadt anregen</h3>
+          <p>Viele Kommunen veröffentlichen ihre Ratsunterlagen über eine offene Schnittstelle. Anregungen für weitere Städte und Kontakte zu Initiativen vor Ort sind willkommen.</p>
+          <p class="karte-links"><span class="offen">Anregung per E-Mail (Adresse offen)</span> <a href="https://github.com/daimpad/ratsatlas/issues/new">Anregung auf GitHub</a></p>
+        </li>
+        <li class="karte glass">
+          <svg class="symbol" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M14 4l-4 16"/></svg>
+          <h3>Mitentwickeln</h3>
+          <p>Quellcode und Gestaltung stehen unter freier Lizenz. Beiträge zu Verortung, Barrierefreiheit, Texten und Technik sind willkommen.</p>
+          <p class="karte-links"><a href="https://github.com/daimpad/ratsatlas">Quellcode auf GitHub</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 7 · Grundsätze -->
+    <section class="abschnitt" id="grundsaetze" aria-labelledby="grundsaetze-titel">
+      <p class="abschnitt-marke">Grundsätze</p>
+      <h2 id="grundsaetze-titel">Grundsätze</h2>
+      <dl class="grundsaetze glass">
+        <div><dt>Quellentreue</dt><dd>Jede Angabe stammt aus den Veröffentlichungen der Stadt und verweist auf das Originaldokument. Abgeleitete Angaben tragen eine Kennzeichnung.</dd></div>
+        <div><dt>Unparteilichkeit</dt><dd>Der Ratsatlas bewertet keine politischen Positionen, Fraktionen oder Entscheidungen. Er ordnet und macht sichtbar.</dd></div>
+        <div><dt>Offenheit</dt><dd>Der Quellcode steht unter MIT-Lizenz, die Daten stammen aus offenen Schnittstellen der Städte. Verfahren und Prüfergebnisse sind öffentlich dokumentiert.</dd></div>
+        <div><dt>Datensparsamkeit</dt><dd>Keine Cookies, keine Reichweitenmessung, keine Werbung. Anfragen an fremde Server nur auf ausdrückliche Wahl, etwa für eine farbige Karte.</dd></div>
+        <div><dt>Barrierearmut</dt><dd>Gestaltung und Prüfung richten sich nach den Anforderungen der WCAG 2.1 auf Stufe AA: Bedienung per Tastatur, ausreichende Kontraste, Rücksicht auf reduzierte Bewegung.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 8 · Projekt und Unterstützung -->
+    <section class="abschnitt" id="projekt" aria-labelledby="projekt-titel">
+      <p class="abschnitt-marke">Projekt</p>
+      <h2 id="projekt-titel">Projekt und Unterstützung</h2>
+      <div class="projekt glass">
+        <div class="projekt-text">
+          <p>Der Ratsatlas ist ein Projekt von Damian Paderta. Die erste Instanz entstand für die Stadt Bonn; weitere Städte folgen schrittweise.</p>
+        </div>
+        <div class="projekt-unterstuetzung">
+          <p class="projekt-label">Unterstützt von</p>
+          <span class="offen-link"><img src="partner/oknrw.svg" width="271" height="46" alt="Offene Kommunen.NRW"></span>
+          <p class="projekt-satz">Offene Kommunen.NRW unterstützt den Ratsatlas als Beitrag zu nachvollziehbaren kommunalen Entscheidungen und bürgerschaftlichem Engagement. <span class="offen">(Wortlaut und Link in Abstimmung)</span></p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="fuss">
