@@ -134,10 +134,7 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 @media (min-width: 900px) { .projekt-unterstuetzung { padding: 0 0 0 40px; border-top: 0; border-left: 1px solid var(--line); } }
 .projekt-label { margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
 .projekt-unterstuetzung img { display: block; width: min(320px, 100%); height: auto; }
-.projekt-satz { margin: 14px 0 0; color: var(--text-muted); font-size: 15px; }
-
-/* Platzhalter im Entwurf (vor Veröffentlichung entfernen) */
-.offen { display: inline-block; padding: 0 6px; border: 1px dashed var(--warn); border-radius: 6px; color: #5c3200; background: #fdf1e3; font-weight: 500; font-size: 14px; }
+.projekt-logo { display: inline-block; border-radius: var(--radius-s); }
 
 /* Bewegung nur ohne Wunsch nach reduzierter Bewegung */
 @media (prefers-reduced-motion: reduce) {
