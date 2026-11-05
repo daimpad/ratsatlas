@@ -90,6 +90,11 @@ def jsonld_html(staedte, einzug):
         "inLanguage": "de",
         "description": "Der Ratsatlas erschließt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen "
                        "räumlich, zeitlich und nach beteiligten Gremien und Ämtern.",
+        "publisher": {"@type": "Person", "name": "Damian Paderta"},
+        "sponsor": {"@type": "Organization", "name": "Offene Kommunen.NRW", "url": "https://oknrw.de/"},
+        "about": ["Kommunalpolitik", "Ratsinformationssystem", "Transparenz", "Bürgerbeteiligung"],
+        "isAccessibleForFree": True,
+        "license": "https://opensource.org/licenses/MIT",
         # Nur erreichbare Instanzen; Städte „in Vorbereitung“ erscheinen erst, wenn sie online sind
         "hasPart": [
             {"@type": "WebSite", "name": s["titel"], "url": s["url"].rstrip("/") + "/", "inLanguage": "de"}

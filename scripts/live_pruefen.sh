@@ -40,6 +40,18 @@ fi
 ist=$(curl -fsS --max-time 20 "$BASIS/version.txt" 2> /dev/null | tr -d '[:space:]')
 zeile "Stand $BASIS/version.txt = Branch deploy" "${soll:0:7}" "${ist:0:7}" "$([ -n "$soll" ] && [ "$ist" = "$soll" ] && echo ok)"
 
+# Suchmaschinen: robots.txt, Sitemap, Canonical, eine Adresse je Seite, Vorschaubild
+robots=$(curl -fsS --max-time 20 "$BASIS/robots.txt" 2> /dev/null)
+zeile "robots.txt nennt die Sitemap" "Sitemap: $BASIS/sitemap.xml" "$(printf '%s' "$robots" | grep -i '^Sitemap:' | head -1)" "$(printf '%s' "$robots" | grep -qi "^Sitemap: $BASIS/sitemap.xml" && echo ok)"
+sitemap=$(curl -fsS --max-time 20 "$BASIS/sitemap.xml" 2> /dev/null)
+anzahl=$(printf '%s' "$sitemap" | grep -c '<loc>')
+zeile "sitemap.xml" "<urlset> mit <loc> und <lastmod>" "$anzahl Adressen, lastmod: $(printf '%s' "$sitemap" | grep -c '<lastmod>')" "$([ "$anzahl" -gt 0 ] && printf '%s' "$sitemap" | grep -q '<lastmod>' && echo ok)"
+canon=$(curl -fsS --max-time 20 "$BASIS/" 2> /dev/null | grep -o '<link rel="canonical" href="[^"]*"' | head -1 | sed 's/.*href="//;s/"$//')
+zeile "Canonical der Startseite" "$BASIS/" "${canon:-fehlt}" "$([ "$canon" = "$BASIS/" ] && echo ok)"
+weiter "$BASIS/index.html" "$BASIS/"
+og=$(curl -fsS --max-time 20 -o /dev/null -w '%{http_code} %{content_type}' "$BASIS/og-image.png" 2> /dev/null)
+zeile "Vorschaubild $BASIS/og-image.png" "200 image/png" "${og:-keine Antwort}" "$(case "$og" in "200 image/png"*) echo ok;; esac)"
+
 # 404-Seite
 code=$(curl -sS --max-time 20 -o /tmp/live404.html -w '%{http_code}' "$BASIS/gibt-es-nicht")
 eigene=$(grep -c 'Diese Seite gibt es nicht' /tmp/live404.html 2>/dev/null || true)
