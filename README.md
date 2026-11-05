@@ -22,13 +22,15 @@
 
 <br>
 
-<a href="https://ratsatlas.de"><img src="docs/startseite.webp" width="860" alt="Startseite ratsatlas.de: Einleitung und zwei Kacheln, Ratsatlas Bonn (online) und Ratsatlas Köln (in Vorbereitung)"></a>
+<a href="https://ratsatlas.de"><img src="docs/startseite.webp" width="860" alt="Startseite ratsatlas.de: Überschrift „Ratsentscheidungen vor der eigenen Haustür“, Einleitung, Schaltflächen und eine stilisierte Stadtkarte mit Ortsmarken über einer Zeitleiste"></a>
 
 </div>
 
 ## Worum es geht
 
 Der Ratsatlas erschließt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen räumlich, zeitlich und nach beteiligten Gremien und Ämtern. Jede Angabe ist auf ihre Quelle im Ratsinformationssystem rückführbar; abgeleitete Informationen sind gekennzeichnet.
+
+Das Projekt wird von [Offene Kommunen.NRW](https://oknrw.de/) unterstützt.
 
 Dieses Repository ist der **gemeinsame Kern**: Es trägt die Startseite [ratsatlas.de](https://ratsatlas.de) und die Gestaltungsgrößen (`site/tokens.css`), Schrift und Symbole, die die Stadtinstanzen übernehmen. Jede Stadt läuft unter einer eigenen Subdomain aus einem eigenen Repository.
 

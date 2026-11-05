@@ -23,6 +23,7 @@ ratsatlas/
 │   ├── style.css          Seitenlayout, Kacheln, Textseiten
 │   ├── fonts/             Inter (variabel, woff2) mit Lizenzdatei
 │   ├── vorschau/          Vorschaubilder der Kacheln
+│   ├── partner/           Logo Offene Kommunen.NRW (Farben als Attribute, wegen CSP)
 │   └── …                  Favicons, App-Symbole, site.webmanifest, robots.txt, sitemap.xml
 ├── staedte.json           Städteliste
 ├── scripts/
