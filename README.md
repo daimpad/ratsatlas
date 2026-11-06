@@ -22,7 +22,7 @@
 
 <br>
 
-<a href="https://ratsatlas.de"><img src="docs/startseite.webp" width="860" alt="Startseite ratsatlas.de: Überschrift „Ratsentscheidungen vor der eigenen Haustür“, Einleitung, Schaltflächen und eine stilisierte Stadtkarte mit Ortsmarken über einer Zeitleiste"></a>
+<a href="https://ratsatlas.de"><img src="docs/startseite.webp" width="860" alt="Startseite ratsatlas.de: Überschrift „Ratsentscheidungen vor der eigenen Haustür“, Einleitung, Schaltflächen „Städte ansehen“ und „Mitwirken“ und eine stilisierte Stadtkarte mit Ortsmarken über einer Zeitleiste"></a>
 
 </div>
 
@@ -65,7 +65,7 @@ flowchart LR
 
 ## Eine Stadt hinzufügen
 
-1. Eintrag in [`staedte.json`](staedte.json) ergänzen – Status `in Vorbereitung` ergibt eine Kachel ohne Link, `online` eine verlinkte Kachel.
+1. Eintrag in [`staedte.json`](staedte.json) ergänzen – Status `in Vorbereitung` ergibt eine schmale Zeile ohne Link, `online` eine Kachel mit Knopf.
 2. `python3 scripts/kacheln.py` ausführen; das Skript schreibt Kacheln und JSON-LD in `site/index.html`.
 3. Pull Request öffnen – „Prüfen“ stellt sicher, dass HTML und Liste übereinstimmen.
 

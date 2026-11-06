@@ -55,14 +55,14 @@ Die Gestaltung stammt aus der RIS-Karte Bonn ([allris-test](https://github.com/d
 | `--cta` | Verlauf `#7c3aed → #5b21b6`, 135° | Schaltflächen |
 | `--ok` / `--warn` | `#1f7a4d` / `#9a5200` | Status „Online“ / „In Vorbereitung“ |
 
-Nur helles Farbschema (`color-scheme: light`), Schrift Inter mit `font-display: swap`. Zwei Spalten ab 720 px, darunter eine. Bei `prefers-reduced-motion` entfällt die Anhebung der Kacheln.
+Maßsystem in `tokens.css`: Schriftskala mit sieben Stufen (`--text-xs` bis `--text-3xl`), Abstände im 4-px-Raster (`--space-1` bis `--space-8`), Radien (`--radius-s`, `--radius`, `--radius-pill`), Mindestgröße für Bedienflächen `--tap` (44 px); `style.css` verwendet nur diese Werte. Mobile First: Grundregeln für das Telefon, Erweiterungen ab 720 px (Tablet: Karten zweispaltig, Stadt-Kachel waagerecht) und 1000 px (Desktop: Stadt-Grafik neben dem Einstieg, Schritte als Zeitstrahl). Auf dem Telefon ist die Sprungleiste einzeilig und waagerecht scrollbar. Nur helles Farbschema (`color-scheme: light`), Schrift Inter mit `font-display: swap`. Bei `prefers-reduced-motion` entfallen Anhebung und Pfeilbewegung.
 
 ## Kacheln aus der Städteliste
 
 `scripts/kacheln.py` (nur Standardbibliothek) liest `staedte.json`, prüft Pflichtfelder, Status, `https`-Adresse und vorhandene Bilder und ersetzt in `site/index.html` den Inhalt zwischen den Markierungen `kacheln:anfang/ende` und `jsonld:anfang/ende`.
 
-- `online` → Kachel mit Link; die ganze Kachel ist klickbar (`h3 a::after`), ein Link je Kachel
-- `in Vorbereitung` → Kachel ohne Link, Status als Text, nicht nur als Farbe
+- `online` → Kachel mit Bild, Angaben und Knopf „<Titel> öffnen“; der Knopf ist der einzige Link und deckt die ganze Kachel ab (`.kachel-knopf::after`)
+- `in Vorbereitung` → schmale Zeile ohne Link und ohne Bildfläche, Status als Text, nicht nur als Farbe
 - JSON-LD `WebSite` mit `hasPart` nur für Städte mit Status `online`
 
 `python3 scripts/kacheln.py --pruefen` endet mit Fehlercode 1, wenn das HTML nicht zur Liste passt.

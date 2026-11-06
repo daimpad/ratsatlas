@@ -48,36 +48,53 @@ def laden():
 
 
 def kachel(s, einzug):
+    """Stadt mit Status „online“: Kachel mit Bild, Angaben und Knopf. Der Knopf ist der einzige Link
+    und deckt die ganze Kachel ab (ein Link je Kachel, keine doppelten Tabstopps)."""
     e = html.escape
-    online = s["status"] == "online"
     status_text, status_klasse = STATUS[s["status"]]
-    klasse = "kachel glass " + ("kachel-link" if online else "kachel-ohne-link")
     if s.get("bild"):
         kopf = f'<img src="{e(s["bild"])}" width="1200" height="630" alt="">'
     else:
         kopf = '<img class="kachel-symbol" src="favicon.svg" width="72" height="72" alt="">'
-    titel = f'<a href="{e(s["url"])}">{e(s["titel"])}</a>' if online else e(s["titel"])
     zeilen = [
-        f'<li class="{klasse}">',
+        '<li class="kachel glass kachel-link">',
         f'  <div class="kachel-kopf">{kopf}</div>',
         '  <div class="kachel-inhalt">',
-        f'    <h3>{titel}</h3>',
+        f'    <h3>{e(s["titel"])}</h3>',
         f'    <p class="kachel-text">{e(s["beschreibung"])}</p>',
         '    <dl class="kachel-angaben">',
         f'      <dt>Adresse</dt><dd>{e(s["adresse"])}</dd>',
         f'      <dt>Datenquelle</dt><dd>{e(s["quelle"])}</dd>',
         f'      <dt>Status</dt><dd><span class="status {status_klasse}">{status_text}</span></dd>',
         '    </dl>',
+        f'    <p class="kachel-aktion"><a class="knopf kachel-knopf" href="{e(s["url"])}">{e(s["titel"])} öffnen'
+        '<span class="knopf-pfeil" aria-hidden="true">→</span></a></p>',
         '  </div>',
         '</li>',
     ]
     return "\n".join(einzug + z for z in zeilen)
 
 
+def vorbereitung(s, einzug):
+    """Stadt „in Vorbereitung“: schmale Zeile ohne Bildfläche und ohne Link (nichts zu öffnen)."""
+    e = html.escape
+    status_text, status_klasse = STATUS[s["status"]]
+    return (f'{einzug}<li><strong>{e(s["titel"])}</strong> <span class="status {status_klasse}">{status_text}</span> '
+            f'<span class="vorbereitung-angaben">{e(s["adresse"])} · {e(s["quelle"])}</span></li>')
+
+
 def kacheln_html(staedte, einzug):
-    teile = [einzug + '<ul class="kacheln">']
-    teile += [kachel(s, einzug + "  ") for s in staedte]
-    teile.append(einzug + "</ul>")
+    online = [s for s in staedte if s["status"] == "online"]
+    spaeter = [s for s in staedte if s["status"] != "online"]
+    teile = []
+    if online:
+        teile.append(einzug + '<ul class="kacheln">')
+        teile += [kachel(s, einzug + "  ") for s in online]
+        teile.append(einzug + "</ul>")
+    if spaeter:
+        teile.append(einzug + '<ul class="vorbereitung">')
+        teile += [vorbereitung(s, einzug + "  ") for s in spaeter]
+        teile.append(einzug + "</ul>")
     return "\n".join(teile)
 
 
