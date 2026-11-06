@@ -76,9 +76,9 @@
     <a class="marke" href="./"><img src="favicon.svg" width="36" height="36" alt="">Ratsatlas</a>
     <nav class="leiste" aria-label="Abschnitte">
       <ul>
+        <li><a href="#staedte">Städte</a></li>
         <li><a href="#motivation">Motivation</a></li>
         <li><a href="#vorgehen">Vorgehen</a></li>
-        <li><a href="#staedte">Städte</a></li>
         <li><a href="#mitwirkung">Mitwirkung</a></li>
         <li><a href="#projekt">Projekt</a></li>
       </ul>
@@ -93,7 +93,7 @@
         <h1 id="titel">Ratsentscheidungen vor der eigenen Haustür</h1>
         <p class="einstieg-lead">Der Ratsatlas zeigt öffentliche Vorlagen aus kommunalen Ratsinformationssystemen auf Karte und Zeitleiste: den Ort einer Planung, die beratenden Gremien und den weiteren Verlauf. Jede Angabe führt zurück zur Quelle.</p>
         <p class="knoepfe">
-          <a class="knopf" href="https://bonn.ratsatlas.de">Ratsatlas Bonn öffnen</a>
+          <a class="knopf" href="#staedte">Städte ansehen</a>
           <a class="knopf knopf-leise" href="#mitwirkung">Mitwirken</a>
         </p>
       </div>
@@ -152,9 +152,34 @@
       </div>
     </section>
 
-    <!-- 3 · Motivation -->
+    <!-- 3 · Städte -->
+    <section class="abschnitt" id="staedte" aria-labelledby="staedte-titel">
+      <h2 id="staedte-titel">Städte im Ratsatlas</h2>
+      <p class="abschnitt-lead">Jede Stadt hat eine eigene Instanz unter eigener Adresse. Weitere Städte folgen schrittweise.</p>
+      <!-- kacheln:anfang (erzeugt von scripts/kacheln.py aus staedte.json – nicht von Hand ändern) -->
+      <ul class="kacheln">
+        <li class="kachel glass kachel-link">
+          <div class="kachel-kopf"><img src="vorschau/bonn.jpg" width="1200" height="630" alt=""></div>
+          <div class="kachel-inhalt">
+            <h3>Ratsatlas Bonn</h3>
+            <p class="kachel-text">Vorlagen aus dem Ratsinformationssystem der Stadt Bonn auf Karte und Zeitleiste</p>
+            <dl class="kachel-angaben">
+              <dt>Adresse</dt><dd>bonn.ratsatlas.de</dd>
+              <dt>Datenquelle</dt><dd>OParl-Schnittstelle der Stadt Bonn</dd>
+              <dt>Status</dt><dd><span class="status status-online">Online</span></dd>
+            </dl>
+            <p class="kachel-aktion"><a class="knopf kachel-knopf" href="https://bonn.ratsatlas.de">Ratsatlas Bonn öffnen<span class="knopf-pfeil" aria-hidden="true">→</span></a></p>
+          </div>
+        </li>
+      </ul>
+      <ul class="vorbereitung">
+        <li><strong>Ratsatlas Köln</strong> <span class="status status-vorbereitung">In Vorbereitung</span> <span class="vorbereitung-angaben">koeln.ratsatlas.de · OParl-Schnittstelle der Stadt Köln</span></li>
+      </ul>
+      <!-- kacheln:ende -->
+    </section>
+
+    <!-- 4 · Motivation -->
     <section class="abschnitt" id="motivation" aria-labelledby="motivation-titel">
-      <p class="abschnitt-marke">Motivation</p>
       <h2 id="motivation-titel">Öffentlichkeit braucht Übersicht</h2>
       <p class="abschnitt-lead">Kommunale Entscheidungen prägen den Alltag: Schulwege, Plätze, Radwege, Bebauung, Grünflächen. Die Unterlagen dazu sind öffentlich. Ihr Verständnis erfordert dennoch viel Zeit und Vorwissen.</p>
       <ul class="karten karten-3">
@@ -176,9 +201,8 @@
       </ul>
     </section>
 
-    <!-- 4 · Vorgehen -->
+    <!-- 5 · Vorgehen -->
     <section class="abschnitt" id="vorgehen" aria-labelledby="vorgehen-titel">
-      <p class="abschnitt-marke">Vorgehen</p>
       <h2 id="vorgehen-titel">Von der Vorlage zur Karte</h2>
       <p class="abschnitt-lead">Der Ratsatlas erzeugt keine eigenen Inhalte. Er ordnet die Veröffentlichungen der Städte.</p>
       <ol class="schritte">
@@ -201,44 +225,8 @@
       </ol>
     </section>
 
-    <!-- 5 · Städte -->
-    <section class="abschnitt" id="staedte" aria-labelledby="staedte-titel">
-      <p class="abschnitt-marke">Städte</p>
-      <h2 id="staedte-titel">Städte im Ratsatlas</h2>
-      <p class="abschnitt-lead">Jede Stadt hat eine eigene Instanz unter eigener Adresse. Weitere Städte folgen schrittweise.</p>
-      <!-- kacheln:anfang (erzeugt von scripts/kacheln.py aus staedte.json – nicht von Hand ändern) -->
-      <ul class="kacheln">
-        <li class="kachel glass kachel-link">
-          <div class="kachel-kopf"><img src="vorschau/bonn.jpg" width="1200" height="630" alt=""></div>
-          <div class="kachel-inhalt">
-            <h3><a href="https://bonn.ratsatlas.de">Ratsatlas Bonn</a></h3>
-            <p class="kachel-text">Vorlagen aus dem Ratsinformationssystem der Stadt Bonn auf Karte und Zeitleiste</p>
-            <dl class="kachel-angaben">
-              <dt>Adresse</dt><dd>bonn.ratsatlas.de</dd>
-              <dt>Datenquelle</dt><dd>OParl-Schnittstelle der Stadt Bonn</dd>
-              <dt>Status</dt><dd><span class="status status-online">Online</span></dd>
-            </dl>
-          </div>
-        </li>
-        <li class="kachel glass kachel-ohne-link">
-          <div class="kachel-kopf"><img class="kachel-symbol" src="favicon.svg" width="72" height="72" alt=""></div>
-          <div class="kachel-inhalt">
-            <h3>Ratsatlas Köln</h3>
-            <p class="kachel-text">Vorlagen aus dem Ratsinformationssystem der Stadt Köln auf Karte und Zeitleiste</p>
-            <dl class="kachel-angaben">
-              <dt>Adresse</dt><dd>koeln.ratsatlas.de</dd>
-              <dt>Datenquelle</dt><dd>OParl-Schnittstelle der Stadt Köln</dd>
-              <dt>Status</dt><dd><span class="status status-vorbereitung">In Vorbereitung</span></dd>
-            </dl>
-          </div>
-        </li>
-      </ul>
-      <!-- kacheln:ende -->
-    </section>
-
     <!-- 6 · Mitwirkung -->
     <section class="abschnitt" id="mitwirkung" aria-labelledby="mitwirkung-titel">
-      <p class="abschnitt-marke">Mitwirkung</p>
       <h2 id="mitwirkung-titel">Mitwirkung</h2>
       <p class="abschnitt-lead">Der Ratsatlas lebt von Aufmerksamkeit, Hinweisen und Beiträgen aus der Stadtgesellschaft. Vier Wege stehen offen.</p>
       <ul class="karten karten-4">
@@ -271,7 +259,6 @@
 
     <!-- 7 · Grundsätze -->
     <section class="abschnitt" id="grundsaetze" aria-labelledby="grundsaetze-titel">
-      <p class="abschnitt-marke">Grundsätze</p>
       <h2 id="grundsaetze-titel">Grundsätze</h2>
       <dl class="grundsaetze glass">
         <div><dt>Quellentreue</dt><dd>Jede Angabe stammt aus den Veröffentlichungen der Stadt und verweist auf das Originaldokument. Abgeleitete Angaben tragen eine Kennzeichnung.</dd></div>
@@ -284,7 +271,6 @@
 
     <!-- 8 · Projekt und Unterstützung -->
     <section class="abschnitt" id="projekt" aria-labelledby="projekt-titel">
-      <p class="abschnitt-marke">Projekt</p>
       <h2 id="projekt-titel">Projekt und Unterstützung</h2>
       <div class="projekt glass">
         <div class="projekt-text">
