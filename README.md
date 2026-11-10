@@ -40,6 +40,7 @@ Dieses Repository ist der **gemeinsame Kern**: Es trägt die Startseite [ratsatl
 |---|---|---|---|---|
 | Bonn | [bonn.ratsatlas.de](https://bonn.ratsatlas.de) | OParl-Schnittstelle der Stadt Bonn | [daimpad/allris-test](https://github.com/daimpad/allris-test) | ![online](https://img.shields.io/badge/-online-1f7a4d) |
 | Köln | koeln.ratsatlas.de | OParl-Schnittstelle der Stadt Köln | offen | ![in Vorbereitung](https://img.shields.io/badge/-in%20Vorbereitung-9a5200) |
+| Wuppertal | wuppertal.ratsatlas.de | OParl-Schnittstelle der Stadt Wuppertal | [daimpad/ratsatlas-wuppertal](https://github.com/daimpad/ratsatlas-wuppertal) | ![in Vorbereitung](https://img.shields.io/badge/-in%20Vorbereitung-9a5200) |
 
 ## Vom Commit zur Seite
 

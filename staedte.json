@@ -22,6 +22,17 @@
       "status": "in Vorbereitung",
       "bild": null,
       "repository": null
+    },
+    {
+      "id": "wuppertal",
+      "titel": "Ratsatlas Wuppertal",
+      "url": "https://wuppertal.ratsatlas.de",
+      "adresse": "wuppertal.ratsatlas.de",
+      "beschreibung": "Vorlagen aus dem Ratsinformationssystem der Stadt Wuppertal auf Karte und Zeitleiste",
+      "quelle": "OParl-Schnittstelle der Stadt Wuppertal",
+      "status": "in Vorbereitung",
+      "bild": null,
+      "repository": "https://github.com/daimpad/ratsatlas-wuppertal"
     }
   ]
 }
