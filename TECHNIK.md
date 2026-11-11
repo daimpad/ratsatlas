@@ -30,6 +30,7 @@ ratsatlas/
 │   ├── kacheln.py         schreibt Kacheln und JSON-LD; --pruefen für CI
 │   ├── sitemap.py         schreibt sitemap.xml mit lastmod aus der Git-Historie (im Workflow)
 │   ├── og_bild.py         erzeugt site/og-image.png aus og-bild.html (von Hand, Playwright)
+│   ├── indexnow.py        meldet geänderte Seiten an IndexNow (im Workflow nach dem Deploy)
 │   └── live_pruefen.sh    prüft die ausgelieferte Seite
 ├── deploy/
 │   ├── htaccess           wird im Branch deploy zu .htaccess
@@ -96,6 +97,8 @@ Alle Actions sind auf Commit-Hashes festgelegt; Schreibrechte gelten nur in den 
 - Die Ausweichadresse auf GitHub Pages trägt `noindex` (gesetzt im Workflow), damit sie nicht mit ratsatlas.de konkurriert.
 - `sitemap.xml` mit `lastmod` je Seite, erzeugt von `scripts/sitemap.py` im Workflow; `robots.txt` verweist darauf.
 - Vorschau für geteilte Links: `og-image.png` (1200 × 630), Twitter-Karte `summary_large_image`.
+- IndexNow (Bing, über Bing auch DuckDuckGo und Ecosia; nicht Google): Schlüsseldatei `site/<schlüssel>.txt`; der Workflow meldet nach jedem neuen Stand von `deploy` die geänderten HTML-Seiten, sobald `version.txt` auf ratsatlas.de den Stand zeigt. Fehler bei IndexNow sind Warnungen.
+- Links von der Stadt-Kachel auf Themenseiten der Instanz (`themen` in `staedte.json`) führen Suchmaschinen und Lesende direkt zu den inhaltsreichen Seiten.
 - JSON-LD `WebSite` mit `publisher` (Damian Paderta), `sponsor` (Offene Kommunen.NRW), `about` und `hasPart` (Städte mit Status `online`).
 - Keine Reichweitenmessung; Auswertung über Google Search Console (Domain-Eigenschaft) und Bing Webmaster Tools.
 

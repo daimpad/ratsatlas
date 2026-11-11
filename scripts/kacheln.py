@@ -41,10 +41,30 @@ def laden():
         if s["id"] in ids:
             sys.exit(f"staedte.json: id {s['id']} doppelt")
         ids.add(s["id"])
+        for t in s.get("themen") or []:
+            if not t.get("titel") or not str(t.get("url", "")).startswith("https://"):
+                sys.exit(f"staedte.json: {s['id']}: Thema ohne Titel oder ohne https-Adresse")
+        if s.get("themen_alle") and not s["themen_alle"].startswith("https://"):
+            sys.exit(f"staedte.json: {s['id']}: themen_alle muss mit https:// beginnen")
         bild = s.get("bild")
         if bild and not (WURZEL / "site" / bild).is_file():
             sys.exit(f"staedte.json: {s['id']}: Bild {bild} fehlt in site/")
     return staedte
+
+
+def themen_html(s):
+    """Links auf Themenseiten der Instanz; liegen über der Klickfläche des Knopfs (z-index in style.css)."""
+    e = html.escape
+    themen = s.get("themen") or []
+    if not themen:
+        return []
+    links = [f'<li><a href="{e(t["url"])}">{e(t["titel"])}</a></li>' for t in themen]
+    if s.get("themen_alle"):
+        links.append(f'<li><a href="{e(s["themen_alle"])}">Alle Themen</a></li>')
+    return [f'    <p class="kachel-themen-titel" id="themen-{e(s["id"])}">Themenseiten</p>',
+            f'    <ul class="kachel-themen" aria-labelledby="themen-{e(s["id"])}">',
+            *[f'      {l}' for l in links],
+            '    </ul>']
 
 
 def kachel(s, einzug):
@@ -62,6 +82,7 @@ def kachel(s, einzug):
         '  <div class="kachel-inhalt">',
         f'    <h3>{e(s["titel"])}</h3>',
         f'    <p class="kachel-text">{e(s["beschreibung"])}</p>',
+        *themen_html(s),
         '    <dl class="kachel-angaben">',
         f'      <dt>Adresse</dt><dd>{e(s["adresse"])}</dd>',
         f'      <dt>Datenquelle</dt><dd>{e(s["quelle"])}</dd>',

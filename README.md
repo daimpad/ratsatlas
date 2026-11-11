@@ -66,7 +66,7 @@ flowchart LR
 
 ## Eine Stadt hinzufügen
 
-1. Eintrag in [`staedte.json`](staedte.json) ergänzen – Status `in Vorbereitung` ergibt eine schmale Zeile ohne Link, `online` eine Kachel mit Knopf.
+1. Eintrag in [`staedte.json`](staedte.json) ergänzen (optional mit `themen` – Links auf Themenseiten der Instanz) – Status `in Vorbereitung` ergibt eine schmale Zeile ohne Link, `online` eine Kachel mit Knopf.
 2. `python3 scripts/kacheln.py` ausführen; das Skript schreibt Kacheln und JSON-LD in `site/index.html`.
 3. Pull Request öffnen – „Prüfen“ stellt sicher, dass HTML und Liste übereinstimmen.
 
