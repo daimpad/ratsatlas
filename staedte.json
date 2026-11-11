@@ -1,5 +1,5 @@
 {
-  "hinweis": "Städteliste der Startseite. scripts/kacheln.py schreibt daraus die Kacheln in site/index.html. status: \"online\" (Kachel ist ein Link) oder \"in Vorbereitung\" (kein Link). bild: Pfad relativ zu site/ oder null.",
+  "hinweis": "Städteliste der Startseite. scripts/kacheln.py schreibt daraus die Kacheln in site/index.html. status: \"online\" (Kachel mit Knopf) oder \"in Vorbereitung\" (schmale Zeile ohne Link). bild: Pfad relativ zu site/ oder null. themen: optionale Liste {titel, url} mit Themenseiten der Instanz; themen_alle: Adresse der Übersicht aller Themen.",
   "staedte": [
     {
       "id": "bonn",
@@ -10,7 +10,30 @@
       "quelle": "OParl-Schnittstelle der Stadt Bonn",
       "status": "online",
       "bild": "vorschau/bonn-v2.jpg",
-      "repository": "https://github.com/daimpad/allris-test"
+      "repository": "https://github.com/daimpad/allris-test",
+      "themen": [
+        {
+          "titel": "Verkehr und Mobilität",
+          "url": "https://bonn.ratsatlas.de/thema/verkehr-und-mobilitaet/"
+        },
+        {
+          "titel": "Wohnen und Bauen",
+          "url": "https://bonn.ratsatlas.de/thema/wohnen-und-bauen/"
+        },
+        {
+          "titel": "Schule und Bildung",
+          "url": "https://bonn.ratsatlas.de/thema/schule-und-bildung/"
+        },
+        {
+          "titel": "Klima und Umwelt",
+          "url": "https://bonn.ratsatlas.de/thema/klima-und-umwelt/"
+        },
+        {
+          "titel": "Kunst und Kultur",
+          "url": "https://bonn.ratsatlas.de/thema/kunst-und-kultur/"
+        }
+      ],
+      "themen_alle": "https://bonn.ratsatlas.de/thema/"
     },
     {
       "id": "koeln",

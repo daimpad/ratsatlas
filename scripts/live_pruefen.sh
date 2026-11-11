@@ -52,6 +52,13 @@ weiter "$BASIS/index.html" "$BASIS/"
 og=$(curl -fsS --max-time 20 -o /dev/null -w '%{http_code} %{content_type}' "$BASIS/og-image.png" 2> /dev/null)
 zeile "Vorschaubild $BASIS/og-image.png" "200 image/png" "${og:-keine Antwort}" "$(case "$og" in "200 image/png"*) echo ok;; esac)"
 
+# IndexNow: Schlüsseldatei erreichbar und gleich ihrem Namen
+key=$(ls "$(dirname "$0")/../site" 2>/dev/null | grep -E '^[0-9a-f]{32}\.txt$' | head -1 | sed 's/\.txt$//')
+if [ -n "$key" ]; then
+  inhalt=$(curl -fsS --max-time 20 "$BASIS/$key.txt" 2> /dev/null | tr -d '[:space:]')
+  zeile "IndexNow-Schlüssel $BASIS/$key.txt" "200, Inhalt = Schlüssel" "${inhalt:+gefunden}${inhalt:-fehlt}" "$([ "$inhalt" = "$key" ] && echo ok)"
+fi
+
 # 404-Seite
 code=$(curl -sS --max-time 20 -o /tmp/live404.html -w '%{http_code}' "$BASIS/gibt-es-nicht")
 eigene=$(grep -c 'Diese Seite gibt es nicht' /tmp/live404.html 2>/dev/null || true)

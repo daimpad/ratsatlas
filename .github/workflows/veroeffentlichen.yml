@@ -3,6 +3,7 @@
 # 2. deploy: site/ plus deploy/htaccess (als .htaccess) und version.txt als neuer Commit auf dem Branch deploy
 #    (fortlaufende Historie, kein Force-Push: der Plesk-Webhook ruft nur ab, wenn der neue Stand an den
 #    vorhandenen anschließt; Befund 04.11.2026); das Webhosting (netcup, Plesk-Git) holt den Branch per Webhook ab
+# 2b. IndexNow: geänderte Seiten melden, sobald ratsatlas.de den neuen Stand ausliefert
 # 3. pages: site/ (ohne .htaccess, mit noindex) als Ausweichadresse auf GitHub Pages
 name: Seite veröffentlichen
 
@@ -39,6 +40,7 @@ jobs:
       - name: Sitemap mit Änderungsdatum
         run: python3 scripts/sitemap.py
       - name: Branch deploy fortschreiben
+        id: deploy
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -63,7 +65,12 @@ jobs:
           if git diff --cached --quiet; then echo "Seite unverändert, kein neuer Commit"; exit 0; fi
           git commit -q -m "Seite aus ${GITHUB_SHA::7}, erzeugt $(date -u +%F)"
           git push -q "$url" HEAD:deploy
+          echo "neu=true" >> "$GITHUB_OUTPUT"
           echo "Branch deploy aus ${GITHUB_SHA::7} fortgeschrieben"
+      # Geänderte Seiten an IndexNow melden, sobald ratsatlas.de den neuen Stand ausliefert (scripts/indexnow.py)
+      - name: IndexNow
+        if: steps.deploy.outputs.neu == 'true'
+        run: python3 scripts/indexnow.py --deploy _deploy --sha "${GITHUB_SHA}"
 
   pages:
     needs: pruefen

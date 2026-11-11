@@ -36,6 +36,7 @@ Stand 04.11.2026. Ausgangslage: `ratsatlas.de` liefert bereits über netcup (ngi
 
 - [ ] Google Search Console: Domain-Eigenschaft `ratsatlas.de` (erfasst auch `bonn.` und `koeln.`), Bestätigung über einen **neuen** DNS-TXT-Eintrag `google-site-verification=…` (bestehende MX- und TXT-Einträge bleiben unverändert).
 - [ ] Search Console → Sitemaps: `https://ratsatlas.de/sitemap.xml` einreichen.
+- [ ] Search Console → Sitemaps: auch `https://bonn.ratsatlas.de/sitemap.xml` einreichen (die Domain-Eigenschaft umfasst die Subdomains; rund 7.000 Vorgangsseiten); unter „Seiten“ die Aufnahme beobachten.
 - [ ] Search Console → URL-Prüfung: `https://ratsatlas.de/` prüfen, „Indexierung beantragen“.
 - [ ] Bing Webmaster Tools: „Aus Google Search Console importieren“ (deckt auch DuckDuckGo und Ecosia ab).
 - [ ] GitHub → Repository → „About“ (Zahnrad): Website `https://ratsatlas.de` eintragen.
