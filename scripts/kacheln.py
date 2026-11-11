@@ -21,7 +21,7 @@ SITE_URL = "https://ratsatlas.de/"
 
 STATUS = {
     "online": ("Online", "status-online"),
-    "in Vorbereitung": ("In Vorbereitung", "status-vorbereitung"),
+    "in Vorbereitung": ("Im Aufbau", "status-vorbereitung"),
 }
 PFLICHT = ("id", "titel", "url", "adresse", "beschreibung", "quelle", "status")
 
@@ -96,12 +96,26 @@ def kachel(s, einzug):
     return "\n".join(einzug + z for z in zeilen)
 
 
-def vorbereitung(s, einzug):
-    """Stadt „in Vorbereitung“: schmale Zeile ohne Bildfläche und ohne Link (nichts zu öffnen)."""
+def aufbau(s, einzug):
+    """Stadt „in Vorbereitung“: kleinere Kachel (ab Tablet halbe Breite) mit Banderole „Im Aufbau“, ohne Link
+    (nichts zu öffnen). Die Banderole ist Text nach der Überschrift (Vorleseprogramme: erst Name, dann Status), per CSS oben rechts."""
     e = html.escape
-    status_text, status_klasse = STATUS[s["status"]]
-    return (f'{einzug}<li><strong>{e(s["titel"])}</strong> <span class="status {status_klasse}">{status_text}</span> '
-            f'<span class="vorbereitung-angaben">{e(s["adresse"])} · {e(s["quelle"])}</span></li>')
+    status_text, _ = STATUS[s["status"]]
+    zeilen = [
+        '<li class="kachel kachel-aufbau glass">',
+        '  <div class="kachel-kopf"><img class="kachel-symbol" src="favicon.svg" width="56" height="56" alt=""></div>',
+        '  <div class="kachel-inhalt">',
+        f'    <h3>{e(s["titel"])}</h3>',
+        f'    <p class="banderole">{status_text}</p>',
+        f'    <p class="kachel-text">{e(s["beschreibung"])}</p>',
+        '    <dl class="kachel-angaben">',
+        f'      <dt>Adresse</dt><dd>{e(s["adresse"])}</dd>',
+        f'      <dt>Datenquelle</dt><dd>{e(s["quelle"])}</dd>',
+        '    </dl>',
+        '  </div>',
+        '</li>',
+    ]
+    return "\n".join(einzug + z for z in zeilen)
 
 
 def kacheln_html(staedte, einzug):
@@ -113,8 +127,8 @@ def kacheln_html(staedte, einzug):
         teile += [kachel(s, einzug + "  ") for s in online]
         teile.append(einzug + "</ul>")
     if spaeter:
-        teile.append(einzug + '<ul class="vorbereitung">')
-        teile += [vorbereitung(s, einzug + "  ") for s in spaeter]
+        teile.append(einzug + '<ul class="kacheln kacheln-aufbau">')
+        teile += [aufbau(s, einzug + "  ") for s in spaeter]
         teile.append(einzug + "</ul>")
     return "\n".join(teile)
 
