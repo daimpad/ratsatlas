@@ -39,8 +39,8 @@ Dieses Repository ist der **gemeinsame Kern**: Es trägt die Startseite [ratsatl
 | Stadt | Adresse | Datenquelle | Repository | Status |
 |---|---|---|---|---|
 | Bonn | [bonn.ratsatlas.de](https://bonn.ratsatlas.de) | OParl-Schnittstelle der Stadt Bonn | [daimpad/allris-test](https://github.com/daimpad/allris-test) | ![online](https://img.shields.io/badge/-online-1f7a4d) |
-| Köln | koeln.ratsatlas.de | OParl-Schnittstelle der Stadt Köln | offen | ![in Vorbereitung](https://img.shields.io/badge/-in%20Vorbereitung-9a5200) |
-| Wuppertal | wuppertal.ratsatlas.de | OParl-Schnittstelle der Stadt Wuppertal | [daimpad/ratsatlas-wuppertal](https://github.com/daimpad/ratsatlas-wuppertal) | ![in Vorbereitung](https://img.shields.io/badge/-in%20Vorbereitung-9a5200) |
+| Köln | koeln.ratsatlas.de | OParl-Schnittstelle der Stadt Köln | offen | ![im Aufbau](https://img.shields.io/badge/-im%20Aufbau-9a5200) |
+| Wuppertal | wuppertal.ratsatlas.de | OParl-Schnittstelle der Stadt Wuppertal | [daimpad/ratsatlas-wuppertal](https://github.com/daimpad/ratsatlas-wuppertal) | ![im Aufbau](https://img.shields.io/badge/-im%20Aufbau-9a5200) |
 
 ## Vom Commit zur Seite
 
@@ -66,7 +66,7 @@ flowchart LR
 
 ## Eine Stadt hinzufügen
 
-1. Eintrag in [`staedte.json`](staedte.json) ergänzen (optional mit `themen` – Links auf Themenseiten der Instanz) – Status `in Vorbereitung` ergibt eine schmale Zeile ohne Link, `online` eine Kachel mit Knopf.
+1. Eintrag in [`staedte.json`](staedte.json) ergänzen (optional mit `themen` – Links auf Themenseiten der Instanz) – Status `in Vorbereitung` ergibt eine kleinere Kachel (ab Tablet halbe Breite) mit der Banderole „Im Aufbau“, ohne Link, `online` eine Kachel mit Knopf.
 2. `python3 scripts/kacheln.py` ausführen; das Skript schreibt Kacheln und JSON-LD in `site/index.html`.
 3. Pull Request öffnen – „Prüfen“ stellt sicher, dass HTML und Liste übereinstimmen.
 

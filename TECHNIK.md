@@ -54,7 +54,7 @@ Die Gestaltung stammt aus der RIS-Karte Bonn ([allris-test](https://github.com/d
 | `--text` / `--text-muted` | `#0f0f14` / `#5a5a68` | Text |
 | `--accent-ink` / `--accent-fill` | `#6d28d9` / `#7c3aed` | Links, Wortmarke, Fokusrahmen (statt `#8b5cf6`, wegen WCAG-AA-Kontrast) |
 | `--cta` | Verlauf `#7c3aed → #5b21b6`, 135° | Schaltflächen |
-| `--ok` / `--warn` | `#1f7a4d` / `#9a5200` | Status „Online“ / „In Vorbereitung“ |
+| `--ok` / `--warn` | `#1f7a4d` / `#9a5200` | Status „Online“ / Banderole „Im Aufbau“ |
 
 Maßsystem in `tokens.css`: Schriftskala mit sieben Stufen (`--text-xs` bis `--text-3xl`), Abstände im 4-px-Raster (`--space-1` bis `--space-8`), Radien (`--radius-s`, `--radius`, `--radius-pill`), Mindestgröße für Bedienflächen `--tap` (44 px); `style.css` verwendet nur diese Werte. Mobile First: Grundregeln für das Telefon, Erweiterungen ab 720 px (Tablet: Karten zweispaltig, Stadt-Kachel waagerecht) und 1000 px (Desktop: Stadt-Grafik neben dem Einstieg, Schritte als Zeitstrahl). Auf dem Telefon ist die Sprungleiste einzeilig und waagerecht scrollbar. Nur helles Farbschema (`color-scheme: light`), Schrift Inter mit `font-display: swap`. Bei `prefers-reduced-motion` entfallen Anhebung und Pfeilbewegung.
 
@@ -63,7 +63,7 @@ Maßsystem in `tokens.css`: Schriftskala mit sieben Stufen (`--text-xs` bis `--t
 `scripts/kacheln.py` (nur Standardbibliothek) liest `staedte.json`, prüft Pflichtfelder, Status, `https`-Adresse und vorhandene Bilder und ersetzt in `site/index.html` den Inhalt zwischen den Markierungen `kacheln:anfang/ende` und `jsonld:anfang/ende`.
 
 - `online` → Kachel mit Bild, Angaben und Knopf „<Titel> öffnen“; der Knopf ist der einzige Link und deckt die ganze Kachel ab (`.kachel-knopf::after`)
-- `in Vorbereitung` → schmale Zeile ohne Link und ohne Bildfläche, Status als Text, nicht nur als Farbe
+- `in Vorbereitung` → kleinere Kachel ohne Link, ab 720 px je halbe Breite, mit der Banderole „Im Aufbau“ oben rechts; die Banderole ist Text hinter der Überschrift (Vorleseprogramme lesen erst den Namen, dann den Status), Kontrast weiß auf `--warn` 5,9:1
 - JSON-LD `WebSite` mit `hasPart` nur für Städte mit Status `online`
 
 `python3 scripts/kacheln.py --pruefen` endet mit Fehlercode 1, wenn das HTML nicht zur Liste passt.
