@@ -127,6 +127,8 @@ p { margin: 0; }
 .kacheln-aufbau { margin-top: var(--space-6); }  /* deutlich getrennt von der Bonner Kachel, nicht angeklebt */
 .kachel-aufbau .kachel-kopf { aspect-ratio: auto; height: 96px; }
 .kachel-aufbau .kachel-symbol { width: 56px; height: 56px; opacity: .45; }
+.kachel-aufbau .kachel-kopf:has(> img:not(.kachel-symbol)) { height: auto; aspect-ratio: 1200 / 630; }  /* Bildschirmfoto der Instanz */
+.kachel-titelzeile { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
 .kachel-aufbau .kachel-inhalt { padding: var(--space-4) var(--space-5) var(--space-5); }
 .banderole {
   position: absolute; top: 22px; right: -48px; width: 180px; transform: rotate(45deg);
@@ -207,6 +209,7 @@ p { margin: 0; }
   .kachel-kopf img { object-fit: contain; }  /* Vorschaubild enthält Text: vollständig zeigen, nicht beschneiden */
   .kachel-aufbau { grid-template-columns: 1fr; }   /* kleine Kacheln bleiben senkrecht */
   .kachel-aufbau .kachel-kopf { min-height: 0; border-right: 0; border-bottom: 1px solid var(--border-alt); }
+  .kachel-aufbau .kachel-kopf img:not(.kachel-symbol) { object-fit: cover; object-position: top left; }
   .schritte::before { content: ""; position: absolute; top: 22px; left: 22px; right: calc(25% - 37px); height: 2px; background: linear-gradient(90deg, var(--accent-soft), var(--accent-fill)); }
   .schritte li { padding: calc(44px + var(--space-4)) 0 0; }
   .schritte h3 { padding-top: 0; }
